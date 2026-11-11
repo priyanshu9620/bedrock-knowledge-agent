@@ -10,6 +10,8 @@ requires-python = ">=3.11"
 dependencies = [
     "boto3==1.42.6",
     "fastapi==0.162.2",
+    "google-genai==3.1.0",
+    "numpy==2.4.6",
     "pydantic==2.14.3",
     "pydantic-settings==2.16.2",
     "python-dotenv==1.2.4",
@@ -37,7 +39,8 @@ select = ["E", "F", "I", "B", "UP"]
 "eval/*" = ["E501"]
 "scripts/*" = ["E501"]
 "lambda/*" = ["E501"]
-"src/ka/cli.py" = ["E501"]
+"src/ka/*" = ["E501"]   # prompt strings and docstrings
+"tests/*" = ["E501"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

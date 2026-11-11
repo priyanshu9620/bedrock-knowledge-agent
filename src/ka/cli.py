@@ -1,7 +1,6 @@
-"""`ka` CLI: ask the agent, retrieve from the KB, sync the KB, serve the demo page."""
+"""`ka` CLI: ingest the corpus, ask, retrieve, serve the local demo, show config."""
 
 import json
-import subprocess
 
 import typer
 import uvicorn
@@ -10,63 +9,81 @@ from rich.table import Table
 
 from ka.config import settings
 
-app = typer.Typer(no_args_is_help=True, help="Bedrock Knowledge Agent")
+app = typer.Typer(no_args_is_help=True, help="Knowledge Agent (Gemini + S3 Vectors + Lambda)")
 console = Console()
+
+
+def _show(a) -> None:
+    console.print(f"[bold green]answer>[/bold green] {a.text}")
+    seen = set()
+    for c in a.citations:
+        if c["doc"] not in seen:
+            seen.add(c["doc"])
+            console.print(
+                f"  [dim]cite {c['doc']} ({c.get('score')}): {c['snippet'][:90].replace(chr(10), ' ')}…[/dim]"
+            )
+    for t in a.tool_calls:
+        console.print(
+            f"  [cyan]tool {t['method']} {t['api']} {t['params']}[/cyan] → [dim]{(t['result'] or '')[:120]}[/dim]"
+        )
+    if a.confirmation_requested and a.tool_calls and a.tool_calls[-1]["result"] == "CONFIRMATION_REQUESTED":
+        console.print(f"  [yellow]confirmation needed → ka ask yes --session {a.session_id}[/yellow]")
+    console.print(
+        f"  [dim]{a.latency_s}s · {a.llm_calls} LLM calls · {a.input_tokens}/{a.output_tokens} tokens · session {a.session_id}[/dim]"
+    )
+
+
+_AGENT = None
+
+
+def _agent():
+    global _AGENT
+    if _AGENT is None:
+        from ka.agent import Agent
+
+        _AGENT = Agent()
+    return _AGENT
 
 
 @app.command()
 def ask(
     question: str, session: str = "", confirm: bool = typer.Option(False, help="auto-confirm mutating tools")
 ) -> None:
-    """Ask the agent one question; prints the answer, citations, tool calls and usage."""
-    from ka.client import AgentClient
-
-    a = AgentClient().ask(question, session_id=session or None, auto_confirm=confirm)
-    console.print(f"[bold green]answer>[/bold green] {a.text}")
-    for c in a.citations:
-        console.print(f"  [dim]cite {c['doc']}: {c['snippet'][:90]}…[/dim]")
-    for t in a.tool_calls:
-        console.print(
-            f"  [cyan]tool {t['method']} {t['api']} {t['params']}[/cyan] → [dim]{(t['result'] or '')[:120]}[/dim]"
-        )
-    if a.confirmation_requested and not confirm:
-        console.print(
-            "  [yellow]the agent asked for confirmation before a mutating tool; re-run with --confirm[/yellow]"
-        )
-    console.print(
-        f"  [dim]{a.latency_s}s · {a.llm_calls} LLM calls · {a.input_tokens}/{a.output_tokens} tokens · session {a.session_id}[/dim]"
-    )
+    """Ask one question (local index + in-process tools unless .env points at AWS)."""
+    _show(_agent().ask(question, session_id=session or None, auto_confirm=confirm))
 
 
 @app.command()
-def retrieve(question: str, top_k: int = 5) -> None:
-    """Raw Knowledge Base retrieval: top chunks with scores (no agent, no generation)."""
-    from ka.client import retrieve as _retrieve
-
-    t = Table(title=f"retrieve · top {top_k}")
+def retrieve(question: str, top_k: int = 4) -> None:
+    """Raw vector retrieval: top chunks with cosine scores."""
+    t = Table(title=f"retrieve · top {top_k} · {'S3 Vectors' if settings.vector_bucket else 'local'}")
     for col in ("score", "doc", "text"):
         t.add_column(col)
-    for r in _retrieve(question, top_k=top_k):
-        t.add_row(str(r["score"]), r["doc"], r["text"][:120].replace("\n", " "))
+    for r in _agent().retrieve(question, top_k):
+        t.add_row(str(r["score"]), str(r["doc"]), r["text"][:110].replace("\n", " "))
     console.print(t)
 
 
-@app.command("kb-sync")
-def kb_sync_cmd() -> None:
-    """Start a KB ingestion job (reads data_source_id from tofu output) and wait."""
-    from ka.client import kb_sync
+@app.command()
+def ingest(source: str = typer.Option("local", help="local (corpus/) | s3 (the docs bucket)")) -> None:
+    """Chunk → embed (Gemini) → index (S3 Vectors or local)."""
+    from ka.ingest import ingest as _ingest
+    from ka.ingest import load_docs
 
-    out = json.loads(subprocess.check_output(["tofu", "-chdir=infra", "output", "-json"]))
-    res = kb_sync(out["knowledge_base_id"]["value"], out["data_source_id"]["value"])
-    console.print(res)
+    a = _agent()
+    stats = _ingest(a.index, a.gemini, load_docs(source))
+    console.print({"source": source, "index": "s3vectors" if settings.vector_bucket else "local", **stats})
 
 
 @app.command()
 def serve(host: str = "127.0.0.1", port: int = 8001) -> None:
-    """Demo API + page at /ui."""
+    """Local demo API + page at /ui."""
     uvicorn.run("ka.api:app", host=host, port=port)
 
 
 @app.command()
 def config() -> None:
-    console.print(settings.model_dump())
+    d = settings.model_dump()
+    d["google_api_key"] = "set" if d["google_api_key"] else ""
+    d["api_token"] = "set" if d["api_token"] else ""
+    console.print(json.dumps(d, indent=1))

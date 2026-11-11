@@ -1,4 +1,4 @@
-.PHONY: sync test lint fmt corpus-check lambda-zip ask retrieve serve eval report cost infra-init infra-plan infra-apply infra-destroy infra-output kb-sync env secrets-pack secrets-unpack
+.PHONY: sync test lint fmt corpus-check lambda-zip ask retrieve serve eval report cost infra-init infra-plan infra-apply infra-destroy infra-output ingest ingest-s3 env secrets-pack secrets-unpack
 
 sync:
 	uv sync
@@ -15,8 +15,12 @@ fmt:
 corpus-check:    ## every fact referenced by eval/questions.yml must exist in corpus/facts.yml and the docs
 	uv run python eval/corpus_check.py
 
-lambda-zip:      ## package lambda/ → lambda/build/tools.zip (what Terraform uploads)
-	rm -rf lambda/build && mkdir -p lambda/build && cd lambda && zip -q -r build/tools.zip handler.py data.json
+lambda-zip:      ## tools.zip (handler + data) and api.zip (src/ka + google-genai + boto3 for python3.12 x86_64)
+	rm -rf lambda/build && mkdir -p lambda/build/api && cd lambda && zip -q -r build/tools.zip handler.py data.json
+	uv pip install --quiet --target lambda/build/api --python-platform x86_64-manylinux2014 --python-version 3.12 --only-binary :all: google-genai==3.1.0 boto3==1.42.6 pydantic==2.14.3 pydantic-settings==2.16.2 python-dotenv==1.2.4 pyyaml==6.0.3
+	cp -R src/ka lambda/build/api/ka && cp lambda/openapi.yml lambda/build/api/openapi.yml && cp lambda/handler.py lambda/build/api/handler.py
+	cd lambda/build/api && zip -q -r ../api.zip . -x "*.pyc" -x "*__pycache__*"
+	@ls -la lambda/build/*.zip | awk '{print $$5, $$9}'
 
 ask:             ## ka ask "question"   (needs the stack + .env ids)
 	uv run ka ask "$(Q)"
@@ -42,7 +46,7 @@ infra-init:
 	$(TOFU) init -input=false
 infra-plan: lambda-zip
 	$(TOFU) plan -input=false -out=plan.out
-infra-apply:     ## creates the stack (S3, S3 Vectors, KB, Lambda, Agent) — then: make env kb-sync
+infra-apply:     ## creates the stack (S3 docs, S3 Vectors, 2 Lambdas, Function URL, SSM) — then: make env ingest-s3
 	$(TOFU) apply -input=false plan.out
 infra-destroy:   ## removes everything; run after every session
 	$(TOFU) destroy -input=false
@@ -50,8 +54,11 @@ infra-output:
 	$(TOFU) output
 env:             ## write KB/agent ids from tofu outputs into .env
 	uv run python scripts/write_env.py
-kb-sync:         ## start a Knowledge Base ingestion job and wait for it
-	uv run ka kb-sync
+ingest:          ## chunk → Gemini embeddings → index (S3 Vectors when .env has VECTOR_BUCKET, else local)
+	uv run ka ingest --source $(if $(SRC),$(SRC),local)
+
+ingest-s3:       ## same, reading the docs from the S3 bucket
+	uv run ka ingest --source s3
 
 secrets-pack:
 	scripts/secrets.sh pack

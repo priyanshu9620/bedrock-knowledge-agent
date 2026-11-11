@@ -25,7 +25,7 @@ paths:
     post:
       operationId: calculateReimbursement
       summary: Compute the approved reimbursement amount for an expense under the expense policy caps.
-      description: Use when the user asks how much of an expense will be reimbursed. Categories: meals_domestic, meals_international, internet, mobile, cab, team_outing.
+      description: "Use when the user asks how much of an expense will be reimbursed. Categories: meals_domestic, meals_international, internet, mobile, cab, team_outing."
       requestBody:
         required: true
         content:

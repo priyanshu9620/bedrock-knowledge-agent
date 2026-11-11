@@ -14,11 +14,11 @@ sys.path.insert(0, str(HERE))
 sys.path.insert(0, str(HERE.parent / "src"))
 from score import retrieval_hit, score  # noqa: E402
 
-from ka.client import AgentClient, retrieve  # noqa: E402
+from ka.agent import Agent  # noqa: E402
 from ka.config import settings  # noqa: E402
 
-# USD per 1M tokens (input, output) — Nova 2 Lite list price; the free plan bills against credits
-PRICES = {"nova-2-lite": (0.30, 2.50)}
+# USD per 1M tokens (input, output) — Gemini 3.5 flash-lite list price; the free tier costs 0 within quota
+PRICES = {"gemini-3.5-flash-lite": (0.10, 0.40)}
 
 
 def main() -> int:
@@ -27,15 +27,16 @@ def main() -> int:
     if limit:
         qs = qs[:limit]
     run_id = datetime.now(UTC).strftime("%Y%m%d-%H%M%S")
-    client = AgentClient()
+    client = Agent()
+    where = "S3 Vectors + Lambda" if settings.vector_bucket else "local index + in-process tools"
     print(
-        f"eval · agent {settings.agent_id} alias {settings.agent_alias_id} · kb {settings.knowledge_base_id} · {len(qs)} questions · run {run_id}"
+        f"eval · {settings.gemini_model} / {settings.embedding_model} · {where} · {len(qs)} questions · run {run_id}"
     )
     rows, errors, streak = [], [], 0
     for q in qs:
         try:
             a = client.ask(q["q"], auto_confirm=bool(q["expect"].get("confirm")))
-            ret = retrieve(q["q"], top_k=3) if q["class"] in {"kb", "both"} else []
+            ret = client.retrieve(q["q"], k=3) if q["class"] in {"kb", "both"} else []
             streak = 0
         except Exception as e:  # noqa: BLE001
             streak += 1
@@ -84,8 +85,9 @@ def main() -> int:
     check_names = sorted({k for r in rows for k in r["checks"] if k != "pass"})
     summary = {
         "run_id": run_id,
-        "model": "amazon.nova-2-lite (global profile)",
-        "embeddings": "amazon.titan-embed-text-v2",
+        "model": settings.gemini_model,
+        "embeddings": settings.embedding_model,
+        "backend": where,
         "questions": len(qs),
         "completed": len(rows),
         "errors": errors,
@@ -106,7 +108,10 @@ def main() -> int:
         "llm_calls_per_question": round(sum(r["llm_calls"] for r in rows) / len(rows), 2),
         "tokens_per_question": {"input": round(tin / len(rows)), "output": round(tout / len(rows))},
         "est_cost_usd_per_question_at_list_price": round(
-            (tin * PRICES["nova-2-lite"][0] + tout * PRICES["nova-2-lite"][1]) / 1e6 / len(rows), 5
+            (tin * PRICES["gemini-3.5-flash-lite"][0] + tout * PRICES["gemini-3.5-flash-lite"][1])
+            / 1e6
+            / len(rows),
+            5,
         ),
         "rows": rows,
     }

@@ -1,5 +1,15 @@
 # Progress (newest first)
 
+## 2026-11-12 — PIVOT to v1 (Gemini + S3 Vectors + Lambda); Phase 1 code + infra done
+- User declined the Paid-plan upgrade → D-15…D-19. Bedrock Terraform preserved in `infra-bedrock-v2/` + `docs/V2-BEDROCK.md`.
+- v1: `src/ka` gemini.py / index.py (S3VectorsIndex + LocalIndex) / ingest.py / tools.py (openapi.yml → Gemini
+  declarations; Bedrock-shaped event → Lambda or in-process) / agent.py (loop, retrieve tool, citations, confirmation
+  gate in code) / lambda_api.py (Function URL) / cli / api / ui. 16 offline tests. `infra/` v1 plans at 28 resources
+  (docs bucket, S3 Vectors 768-d, tools + api Lambdas, Function URL, SSM). api.zip 27.7 MB (google-genai + boto3).
+- **Local smoke with real Gemini (local numpy index, in-process tools):** ingest 13 docs → chunks in one embed batch;
+  retrieve ranks 01-leave-policy.md first (0.70); kb answer cites it (3.9 s, 2 LLM calls, 2,878/62 tok); tool answer
+  calls GET /leave-balance (2.8 s); both-class answer = policy + tool (3.5 s); out-of-scope refused.
+
 ## 2026-11-12 — Phases 0 + 1 done; blocked on the Paid-plan upgrade + apply
 - Phase 0: 13 handbook docs + 49 facts (verbatim-checked), Lambda with 4 tools + OpenAPI (x-requireConfirmation on the
   ticket tool), boto3 agent client with trace parsing + return-control confirmation, `ka` CLI, demo page, 40 questions

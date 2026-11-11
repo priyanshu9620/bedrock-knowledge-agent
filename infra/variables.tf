@@ -7,17 +7,19 @@ variable "profile" {
 variable "name" {
   default = "knowledge-agent"
 }
-variable "agent_model_profile" {
-  description = "Inference profile id for the agent model (Nova 2 Lite needs the global profile in this account)"
-  default     = "global.amazon.nova-2-lite-v1:0"
-}
-variable "agent_model_id" {
-  description = "Foundation model id behind the profile (for the IAM policy)"
-  default     = "amazon.nova-2-lite-v1:0"
-}
-variable "embedding_model_id" {
-  default = "amazon.titan-embed-text-v2:0"
-}
 variable "embedding_dimensions" {
-  default = 1024
+  default = 768 # gemini-embedding-001 with output_dimensionality=768
+}
+variable "google_api_key" {
+  sensitive = true
+}
+variable "api_token" {
+  description = "shared secret the demo API requires in X-Api-Token"
+  sensitive   = true
+}
+variable "gemini_model" {
+  default = "gemini-3.5-flash-lite"
+}
+variable "embedding_model" {
+  default = "gemini-embedding-001"
 }

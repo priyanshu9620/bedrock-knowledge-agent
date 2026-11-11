@@ -1,0 +1,2 @@
+google_api_key = ""        # Gemini key (same as .env)
+api_token      = ""        # any long random string; clients send it as X-Api-Token

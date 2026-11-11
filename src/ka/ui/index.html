@@ -14,15 +14,15 @@
  form{display:flex;gap:8px}input{flex:1;padding:10px;border:1px solid var(--line);border-radius:8px;background:var(--bot);color:var(--fg)}
  button{padding:10px 16px;border:0;border-radius:8px;background:#2563eb;color:#fff;cursor:pointer}
 </style></head><body><main>
-<header><strong>Meridian Labs handbook assistant</strong> <small id="meta"></small></header>
+<header><strong>Meridian Labs handbook assistant</strong> <small>(Gemini + S3 Vectors + Lambda)</small> <small id="meta"></small></header>
 <div id="log"></div>
 <form id="f"><input id="q" placeholder="e.g. How many casual leaves do I get, and what is E1001's balance?" autofocus><label><input type="checkbox" id="c"> auto-confirm</label><button>Ask</button></form>
 </main><script>
 const log=document.getElementById('log'),meta=document.getElementById('meta');let session=null;
 function add(c,t){const d=document.createElement('div');d.className='msg '+c;d.textContent=t;log.appendChild(d);log.scrollTop=log.scrollHeight;return d}
-fetch('/healthz').then(r=>r.json()).then(h=>meta.textContent=`agent ${h.agent_id||'?'} · kb ${h.kb_id||'?'} · ${h.region}`);
+const TOKEN=new URLSearchParams(location.search).get('token')||'';fetch('/healthz').then(r=>r.json()).then(h=>meta.textContent=`${h.model||''} · index ${h.index||h.vector_index||''} · tools ${h.tools||'lambda'}`);
 document.getElementById('f').onsubmit=async e=>{e.preventDefault();const q=document.getElementById('q');const t=q.value.trim();if(!t)return;q.value='';add('me',t);const s=add('sys','thinking…');
- try{const r=await fetch('/ask',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({question:t,session_id:session,confirm:document.getElementById('c').checked})});if(!r.ok)throw new Error(r.status+' '+await r.text());const a=await r.json();s.remove();session=a.session_id;
+ try{const r=await fetch('/ask',{method:'POST',headers:{'content-type':'application/json','x-api-token':TOKEN},body:JSON.stringify({question:t,session_id:session,confirm:document.getElementById('c').checked})});if(!r.ok)throw new Error(r.status+' '+await r.text());const a=await r.json();s.remove();session=a.session_id;
   add('bot',a.text||'(no text)');for(const c of a.citations)add('cite','📄 '+c.doc+': '+c.snippet);for(const x of a.tool_calls)add('tool','🔧 '+x.method+' '+x.api+' '+JSON.stringify(x.params)+' → '+(x.result||'').slice(0,160));
   if(a.confirmation_requested)add('sys','agent asked for confirmation before a mutating tool (tick auto-confirm to proceed)');add('sys',`${a.latency_s}s · ${a.llm_calls} LLM calls · ${a.input_tokens}/${a.output_tokens} tokens`)}
  catch(err){s.remove();add('bot','error: '+err.message)}};

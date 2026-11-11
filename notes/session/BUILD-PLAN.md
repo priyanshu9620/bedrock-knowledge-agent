@@ -1,25 +1,19 @@
-# Build plan — Bedrock Knowledge Agent
+# Build plan — Knowledge Agent v1 (Gemini + S3 Vectors + Lambda) — supersedes the Bedrock-only plan (kept in git history)
 
-Order chosen so everything that costs nothing comes first and the AWS stack lives for one short session.
+## Phase 0 — Skeleton + corpus + Lambda + eval scorer  ☑ 2026-11-11 (unchanged by the pivot)
 
-## Phase 0 — Skeleton + corpus + Lambda, all local  ☑ 2026-11-11
-- [x] repo (`uv`, pinned deps, Makefile, `.env.example`, CI), `ka` CLI skeleton, secrets tooling copied from TripMate
-- [x] `corpus/` 12 handbook docs (fictional company) with a `facts.yml` ground-truth sheet (every number/rule we will ask about)
-- [x] `lambda/handler.py`: 4 tools over a bundled JSON table; `lambda/openapi.yml` action-group schema; unit tests
-- [x] `eval/questions.yml` (~40) + `eval/score.py` with unit tests on canned agent outputs
-- Exit: `make test` green offline; `make corpus-check` proves every fact in questions.yml appears in the corpus.
+## Phase 1 — v1 code + infra  ☐
+- [ ] `src/ka`: gemini.py (embed, chat w/ tools, usage), index.py (S3 Vectors store + local numpy fallback), ingest.py (chunk → embed → put), tools.py (openapi.yml → Gemini function declarations; executor → Lambda invoke with the action-group event), agent.py (loop, retrieve tool, citations, confirmation gate), cli/api/ui
+- [ ] `infra/` v1: docs bucket + objects, S3 Vectors bucket + index (768-d), tools Lambda, SSM param for the Gemini key, api Lambda + Function URL + token, IAM; `make lambda-zip` builds both zips (api zip bundles google-genai)
+- [ ] tests: chunking, schema conversion, agent loop with a fake Gemini, index fallback, confirmation gate
+- [ ] `docs/V2-BEDROCK.md`, `infra-bedrock-v2/` preserved
+- Exit: `make test` green; `tofu plan` clean; `ka ask` works locally against a local numpy index built from `corpus/` (no AWS) with the real Gemini.
 
-## Phase 1 — Infra as code (planned, not applied)  ☑ 2026-11-11 (plan: 31 to add)
-- [x] `infra/`: S3 docs bucket (+ upload of `corpus/`), S3 Vectors bucket + index, KB (Titan v2) + S3 data source, Lambda + role, Agent (Nova 2 Lite) + action group + alias, IAM roles/policies with least privilege, outputs
-- [x] `make infra-plan` clean; `make kb-sync` (start ingestion job + wait), `make cost`
-- Exit: `tofu plan` shows the full stack; cost estimate documented in RUNBOOK.
-
-## Phase 2 — The one AWS session (billable, ~1 h)  ☐
-- [ ] user: `make infra-apply` → Claude: `make kb-sync`, `ka retrieve`, `ka ask` smoke for each question class, fix prompts/schema as needed (re-apply is in-place)
-- [ ] `make eval` → `eval/report.md` + `results.json`; screenshots/traces into `docs/`
-- [ ] user: `make infra-destroy`; Claude verifies the account is empty and `make cost` after
-- Exit: measured numbers in the README; evidence in `docs/aws-evidence.md`.
+## Phase 2 — The AWS session (Free plan, ≈ ₹0)  ☐
+- [ ] user: `make infra-apply` → Claude: `make env`, `make ingest` (S3 → chunks → Gemini → S3 Vectors), `ka retrieve`, `ka ask` smoke for each class
+- [ ] `make eval` → `eval/report.md` + `results.json`; demo via the Function URL + `/ui`; evidence to `docs/`
+- [ ] user: `make infra-destroy`; Claude verifies the account is empty; `make cost`
+- Exit: measured numbers in README; `docs/aws-evidence.md`.
 
 ## Phase 3 — Interview material + resume rewrite  ☐
-- [ ] `docs/GUIDE.md`, `docs/RUNBOOK.md`, `INTERVIEW_PREP/01–06`, `DEMO.md`, `notes/BOOTSTRAP.md`, resume lines with numbers
-- Exit: user can explain and re-run everything from the repo alone.
+- [ ] `docs/GUIDE.md`, `docs/RUNBOOK.md` (updated), `INTERVIEW_PREP/01–06`, `DEMO.md`, `notes/BOOTSTRAP.md`, `notes/session/RESUME.md`

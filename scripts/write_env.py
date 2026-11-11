@@ -21,4 +21,4 @@ for key, tf in (
         else text + f"\n{key}={val}"
     )
 env.write_text(text)
-print("wrote", env, {k: out[k]["value"] for k in ("knowledge_base_id", "agent_id", "agent_alias_id")})
+print("wrote", env, {k: out[k]["value"] for k in ("docs_bucket", "vector_bucket", "tools_lambda", "api_url")})
