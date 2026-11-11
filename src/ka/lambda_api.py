@@ -31,6 +31,7 @@ def _bootstrap():
         vector_index=os.environ["VECTOR_INDEX"],
         tools_lambda=os.environ["TOOLS_LAMBDA"],
         gemini_model=os.environ.get("GEMINI_MODEL", "gemini-3.5-flash-lite"),
+        gemini_fallback_model=os.environ.get("GEMINI_FALLBACK_MODEL", "gemini-3.1-flash-lite"),
         embedding_model=os.environ.get("EMBEDDING_MODEL", "gemini-embedding-001"),
         embedding_dimension=int(os.environ.get("EMBEDDING_DIMENSION", "768")),
     )

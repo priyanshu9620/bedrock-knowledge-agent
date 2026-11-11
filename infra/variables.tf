@@ -23,3 +23,6 @@ variable "gemini_model" {
 variable "embedding_model" {
   default = "gemini-embedding-001"
 }
+variable "gemini_fallback_model" {
+  default = "gemini-3.1-flash-lite"
+}

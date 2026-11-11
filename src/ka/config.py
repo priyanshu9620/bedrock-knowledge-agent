@@ -12,6 +12,7 @@ class Settings(BaseSettings):
 
     google_api_key: str = ""
     gemini_model: str = "gemini-3.5-flash-lite"
+    gemini_fallback_model: str = "gemini-3.1-flash-lite"  # used when the primary keeps returning 429/5xx
     embedding_model: str = "gemini-embedding-001"
     embedding_dimension: int = 768
     aws_profile: str | None = None

@@ -30,9 +30,11 @@ class Turn:
 
 
 class Gemini:
-    def __init__(self, api_key: str, model: str, embed_model: str, dims: int):
+    def __init__(self, api_key: str, model: str, embed_model: str, dims: int, fallback_model: str = ""):
         self.client = genai.Client(api_key=api_key)
         self.model, self.embed_model, self.dims = model, embed_model, dims
+        self.fallback_model = fallback_model
+        self.fallbacks_used = 0
 
     def embed(self, texts: list[str], task: str = "RETRIEVAL_DOCUMENT") -> list[list[float]]:
         out: list[list[float]] = []

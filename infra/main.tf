@@ -136,14 +136,15 @@ resource "aws_lambda_function" "api" {
   memory_size      = 512
   environment {
     variables = {
-      KA_NAME             = var.name
-      KA_REGION           = var.region
-      VECTOR_BUCKET       = aws_s3vectors_vector_bucket.vectors.vector_bucket_name
-      VECTOR_INDEX        = aws_s3vectors_index.handbook.index_name
-      TOOLS_LAMBDA        = aws_lambda_function.tools.function_name
-      GEMINI_MODEL        = var.gemini_model
-      EMBEDDING_MODEL     = var.embedding_model
-      EMBEDDING_DIMENSION = tostring(var.embedding_dimensions)
+      KA_NAME               = var.name
+      KA_REGION             = var.region
+      VECTOR_BUCKET         = aws_s3vectors_vector_bucket.vectors.vector_bucket_name
+      VECTOR_INDEX          = aws_s3vectors_index.handbook.index_name
+      TOOLS_LAMBDA          = aws_lambda_function.tools.function_name
+      GEMINI_MODEL          = var.gemini_model
+      GEMINI_FALLBACK_MODEL = var.gemini_fallback_model
+      EMBEDDING_MODEL       = var.embedding_model
+      EMBEDDING_DIMENSION   = tostring(var.embedding_dimensions)
     }
   }
 }
