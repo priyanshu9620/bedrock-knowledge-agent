@@ -40,7 +40,7 @@ cost:            ## month-to-date spend from Cost Explorer (read-only)
 TOFU = tofu -chdir=infra
 infra-init:
 	$(TOFU) init -input=false
-infra-plan:
+infra-plan: lambda-zip
 	$(TOFU) plan -input=false -out=plan.out
 infra-apply:     ## creates the stack (S3, S3 Vectors, KB, Lambda, Agent) — then: make env kb-sync
 	$(TOFU) apply -input=false plan.out
