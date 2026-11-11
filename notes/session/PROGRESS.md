@@ -1,5 +1,9 @@
 # Progress (newest first)
 
+## 2026-11-12 — local eval (scorer validation): 17/17 passed before the Gemini daily quota ran out (P-5)
+- `eval/run_eval.py` against the local index: q01–q17 (all kb) PASS, p50 ≈ 3.5 s, 2 LLM calls and ~2.7k/50 tokens per
+  question; then 429 on gemini-3.5-flash-lite. Switched to gemini-3.1-flash-lite for the AWS run. Report/runbook written.
+
 ## 2026-11-12 — PIVOT to v1 (Gemini + S3 Vectors + Lambda); Phase 1 code + infra done
 - User declined the Paid-plan upgrade → D-15…D-19. Bedrock Terraform preserved in `infra-bedrock-v2/` + `docs/V2-BEDROCK.md`.
 - v1: `src/ka` gemini.py / index.py (S3VectorsIndex + LocalIndex) / ingest.py / tools.py (openapi.yml → Gemini
