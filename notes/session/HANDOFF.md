@@ -14,8 +14,7 @@ Bedrock Knowledge Agent: RAG Assistant | AWS Bedrock, S3, Lambda · 2026
 Numbers get measured (D-7) and the lines rewritten at the end.
 
 ## Where we are
-**2026-11-12 night:** v1 (Gemini + S3 Vectors + Lambda, D-15…D-19) built, deployed, evaluated 40/40, documented. **Pending:**
-user `make infra-destroy` (+ `make secrets-pack` + push); Claude verifies the account is empty. Then flip the repo public.
+**2026-11-12 night:** v1 (Gemini + S3 Vectors + Lambda, D-15…D-19) built, deployed, evaluated 40/40, documented. AWS destroyed and verified empty; secrets repacked. Remaining: user pushes (token one-off) and flips the repo public.
 Bedrock v2 parked: `docs/V2-BEDROCK.md` + `infra-bedrock-v2/`.
 
 ## Audit facts (read-only probes, profile `shopease`, ap-southeast-2)
@@ -32,4 +31,4 @@ Bedrock v2 parked: `docs/V2-BEDROCK.md` + `infra-bedrock-v2/`.
    Claude verifies afterwards. Target total spend for the whole project < $2.
 
 ## Single next command
-User: `cd ~/Desktop/bedrock-knowledge-agent && make infra-destroy && SECRETS_PASSPHRASE='…' make secrets-pack && git add secrets.tar.enc && git commit -m 'chore: secrets' && git push`
+None required after the push. Optional: Bedrock v2 (docs/V2-BEDROCK.md) when the account is on the Paid plan; hybrid search; LLM-judge score.

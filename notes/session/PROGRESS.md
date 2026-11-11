@@ -1,5 +1,9 @@
 # Progress (newest first)
 
+## 2026-11-12 — PROJECT COMPLETE (v1); AWS destroyed and verified empty
+- User ran `make infra-destroy` (28 destroyed). Verified: 0 buckets, 0 vector buckets, 0 Lambdas, 0 SSM params, tofu state
+  empty. Spend $0.0000. Secrets repacked (now incl. infra/terraform.tfvars). Remaining user steps: token push, flip public.
+
 ## 2026-11-12 — AWS session done: ingest, public URL, eval 40/40; docs + interview prep written; destroy pending
 - User applied v1 (28 resources). `make env` (after fixing write_env), `ka ingest --source s3` → S3 Vectors; retrieve ok;
   CLI kb + tool answers via S3 Vectors + Lambda; Function URL fixed (handler path, P-6) → /healthz 200, 401 without token,

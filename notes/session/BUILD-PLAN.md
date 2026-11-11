@@ -12,7 +12,7 @@
 ## Phase 2 — The AWS session (Free plan, ≈ ₹0)  ☑ 2026-11-12 (destroy pending)
 - [x] user: `make infra-apply` → Claude: `make env`, `make ingest` (S3 → chunks → Gemini → S3 Vectors), `ka retrieve`, `ka ask` smoke for each class
 - [x] `make eval` → `eval/report.md` + `results.json`; demo via the Function URL + `/ui`; evidence to `docs/`
-- [◐] user: `make infra-destroy`; Claude verifies the account is empty; `make cost` (pending)
+- [x] user: `make infra-destroy`; Claude verified the account is empty; cost $0
 - Exit: measured numbers in README; `docs/aws-evidence.md`.
 
 ## Phase 3 — Interview material + resume rewrite  ☑ 2026-11-12
