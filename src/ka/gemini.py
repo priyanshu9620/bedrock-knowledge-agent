@@ -1,9 +1,23 @@
 """Gemini: embeddings and tool-calling chat. One small wrapper so the agent and tests never touch the SDK directly."""
 
+import time
 from dataclasses import dataclass, field
 
 from google import genai
-from google.genai import types
+from google.genai import errors, types
+
+RETRY_STATUS = {429, 500, 502, 503, 504}
+
+
+def _retry(fn, tries: int = 5, base: float = 2.0):
+    """Retry transient Gemini errors (overloaded / rate limit) with exponential backoff: 2, 4, 8, 16 s."""
+    for i in range(tries):
+        try:
+            return fn()
+        except errors.APIError as e:
+            if getattr(e, "code", None) not in RETRY_STATUS or i == tries - 1:
+                raise
+            time.sleep(base * (2**i))
 
 
 @dataclass
@@ -23,10 +37,12 @@ class Gemini:
     def embed(self, texts: list[str], task: str = "RETRIEVAL_DOCUMENT") -> list[list[float]]:
         out: list[list[float]] = []
         for i in range(0, len(texts), 50):  # batch limit is generous; 50 keeps requests small
-            r = self.client.models.embed_content(
-                model=self.embed_model,
-                contents=texts[i : i + 50],
-                config=types.EmbedContentConfig(task_type=task, output_dimensionality=self.dims),
+            r = _retry(
+                lambda i=i: self.client.models.embed_content(
+                    model=self.embed_model,
+                    contents=texts[i : i + 50],
+                    config=types.EmbedContentConfig(task_type=task, output_dimensionality=self.dims),
+                )
             )
             out.extend([e.values for e in r.embeddings])
         return out
@@ -38,7 +54,9 @@ class Gemini:
             temperature=0,
             tools=[types.Tool(function_declarations=decls)] if decls else None,
         )
-        r = self.client.models.generate_content(model=self.model, contents=contents, config=cfg)
+        r = _retry(
+            lambda: self.client.models.generate_content(model=self.model, contents=contents, config=cfg)
+        )
         t = Turn(raw=r)
         u = r.usage_metadata
         if u:

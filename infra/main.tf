@@ -129,7 +129,7 @@ resource "aws_lambda_function" "api" {
   function_name    = "${var.name}-api"
   role             = aws_iam_role.api.arn
   runtime          = "python3.12"
-  handler          = "lambda_api.handler"
+  handler          = "ka.lambda_api.handler"
   filename         = "${path.module}/../lambda/build/api.zip"
   source_code_hash = filebase64sha256("${path.module}/../lambda/build/api.zip")
   timeout          = 60
