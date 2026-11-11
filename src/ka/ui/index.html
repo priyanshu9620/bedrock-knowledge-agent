@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Knowledge Agent</title>
+<style>
+ :root{--bg:#f6f7f9;--fg:#1b1f24;--me:#dbeafe;--bot:#fff;--line:#d0d7de;--cite:#eef6ff;--tool:#fff7e6}
+ @media(prefers-color-scheme:dark){:root{--bg:#0f1115;--fg:#e6e6e6;--me:#1e3a5f;--bot:#1b1f27;--line:#30363d;--cite:#14233a;--tool:#3a2d12}}
+ body{margin:0;font:15px/1.45 system-ui,sans-serif;background:var(--bg);color:var(--fg)}
+ main{max-width:760px;margin:0 auto;padding:16px;display:flex;flex-direction:column;min-height:100vh;box-sizing:border-box}
+ #log{flex:1;overflow:auto;display:flex;flex-direction:column;gap:8px;padding:8px 0}
+ .msg{padding:10px 12px;border-radius:10px;border:1px solid var(--line);max-width:88%;white-space:pre-wrap}
+ .me{background:var(--me);align-self:flex-end}.bot{background:var(--bot);align-self:flex-start}
+ .cite{background:var(--cite);font-size:13px;align-self:stretch;max-width:100%}.tool{background:var(--tool);font-size:13px;align-self:stretch;max-width:100%}
+ .sys{border:0;background:transparent;opacity:.7;font-size:13px;align-self:center}
+ form{display:flex;gap:8px}input{flex:1;padding:10px;border:1px solid var(--line);border-radius:8px;background:var(--bot);color:var(--fg)}
+ button{padding:10px 16px;border:0;border-radius:8px;background:#2563eb;color:#fff;cursor:pointer}
+</style></head><body><main>
+<header><strong>Meridian Labs handbook assistant</strong> <small id="meta"></small></header>
+<div id="log"></div>
+<form id="f"><input id="q" placeholder="e.g. How many casual leaves do I get, and what is E1001's balance?" autofocus><label><input type="checkbox" id="c"> auto-confirm</label><button>Ask</button></form>
+</main><script>
+const log=document.getElementById('log'),meta=document.getElementById('meta');let session=null;
+function add(c,t){const d=document.createElement('div');d.className='msg '+c;d.textContent=t;log.appendChild(d);log.scrollTop=log.scrollHeight;return d}
+fetch('/healthz').then(r=>r.json()).then(h=>meta.textContent=`agent ${h.agent_id||'?'} · kb ${h.kb_id||'?'} · ${h.region}`);
+document.getElementById('f').onsubmit=async e=>{e.preventDefault();const q=document.getElementById('q');const t=q.value.trim();if(!t)return;q.value='';add('me',t);const s=add('sys','thinking…');
+ try{const r=await fetch('/ask',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({question:t,session_id:session,confirm:document.getElementById('c').checked})});if(!r.ok)throw new Error(r.status+' '+await r.text());const a=await r.json();s.remove();session=a.session_id;
+  add('bot',a.text||'(no text)');for(const c of a.citations)add('cite','📄 '+c.doc+': '+c.snippet);for(const x of a.tool_calls)add('tool','🔧 '+x.method+' '+x.api+' '+JSON.stringify(x.params)+' → '+(x.result||'').slice(0,160));
+  if(a.confirmation_requested)add('sys','agent asked for confirmation before a mutating tool (tick auto-confirm to proceed)');add('sys',`${a.latency_s}s · ${a.llm_calls} LLM calls · ${a.input_tokens}/${a.output_tokens} tokens`)}
+ catch(err){s.remove();add('bot','error: '+err.message)}};
+</script></body></html>

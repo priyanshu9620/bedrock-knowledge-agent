@@ -1,0 +1,164 @@
+# Fixed evaluation set. classes: kb (handbook only), tool (Lambda only), both (handbook + tool), oos (out of scope → refuse).
+# expect.contains: ALL must appear in the answer (case-insensitive; "₹"/"," tolerant). expect.cite: a doc that must be cited
+# (kb/both). expect.tool: operation path that must be called; expect.args: subset of tool params. expect.refuse: true → the
+# answer must decline and no tool may be called.
+- id: q01
+  class: kb
+  q: "How many casual leave days do employees get per year?"
+  expect: {contains: ["12"], cite: 01-leave-policy.md}
+- id: q02
+  class: kb
+  q: "What is the maximum earned leave balance that can be carried forward?"
+  expect: {contains: ["30"], cite: 01-leave-policy.md}
+- id: q03
+  class: kb
+  q: "How long is maternity leave?"
+  expect: {contains: ["26"], cite: 01-leave-policy.md}
+- id: q04
+  class: kb
+  q: "How many working days in advance must planned leave be applied?"
+  expect: {contains: ["5"], cite: 01-leave-policy.md}
+- id: q05
+  class: kb
+  q: "What is the daily meal limit on domestic travel?"
+  expect: {contains: ["800"], cite: 02-expense-policy.md}
+- id: q06
+  class: kb
+  q: "Above what amount is a receipt mandatory for expenses?"
+  expect: {contains: ["500"], cite: 02-expense-policy.md}
+- id: q07
+  class: kb
+  q: "Within how many days must an expense claim be submitted?"
+  expect: {contains: ["30"], cite: 02-expense-policy.md}
+- id: q08
+  class: kb
+  q: "Who is allowed to fly business class and on which flights?"
+  expect: {contains: ["L5", "6 hours"], cite: 03-travel-policy.md}
+- id: q09
+  class: kb
+  q: "What is the hotel limit per night in a metro city?"
+  expect: {contains: ["6,000"], cite: 03-travel-policy.md}
+- id: q10
+  class: kb
+  q: "How often must passwords be rotated and what is the minimum length?"
+  expect: {contains: ["90", "14"], cite: 04-it-security-policy.md}
+- id: q11
+  class: kb
+  q: "Where do I report a phishing email?"
+  expect: {contains: ["security@meridianlabs.example"], cite: 04-it-security-policy.md}
+- id: q12
+  class: kb
+  q: "How long is the probation period?"
+  expect: {contains: ["6"], cite: 05-onboarding.md}
+- id: q13
+  class: kb
+  q: "Within how many hours must a lost laptop be reported?"
+  expect: {contains: ["24"], cite: 06-device-policy.md}
+- id: q14
+  class: kb
+  q: "Which days of the week are office days under the hybrid policy?"
+  expect: {contains: ["Tuesday", "Thursday"], cite: 07-remote-work-policy.md}
+- id: q15
+  class: kb
+  q: "How much is the one-time home-office stipend?"
+  expect: {contains: ["15,000"], cite: 07-remote-work-policy.md}
+- id: q16
+  class: kb
+  q: "What is the health insurance cover amount?"
+  expect: {contains: ["5,00,000"], cite: 09-benefits.md}
+- id: q17
+  class: kb
+  q: "What is the yearly learning budget?"
+  expect: {contains: ["25,000"], cite: 09-benefits.md}
+- id: q18
+  class: kb
+  q: "Above what value must gifts from vendors be declared?"
+  expect: {contains: ["2,000"], cite: 10-code-of-conduct.md}
+- id: q19
+  class: kb
+  q: "Within how many minutes must an S1 incident be acknowledged?"
+  expect: {contains: ["15"], cite: 11-incident-process.md}
+- id: q20
+  class: kb
+  q: "By when is a postmortem due after an S1 incident?"
+  expect: {contains: ["5"], cite: 11-incident-process.md}
+- id: q21
+  class: kb
+  q: "What does grade L5 mean?"
+  expect: {contains: ["senior staff"], cite: 12-glossary.md}
+- id: q22
+  class: kb
+  q: "After how many years of service is gratuity payable?"
+  expect: {contains: ["5"], cite: 09-benefits.md}
+- id: q23
+  class: tool
+  q: "What is the leave balance of employee E1001?"
+  expect: {contains: ["21.5"], tool: "/leave-balance/{employee_id}", args: {employee_id: E1001}}
+- id: q24
+  class: tool
+  q: "How much earned leave does E1003 have left?"
+  expect: {contains: ["6"], tool: "/leave-balance/{employee_id}", args: {employee_id: E1003}}
+- id: q25
+  class: tool
+  q: "I spent ₹1,200 on meals in one day of domestic travel with a receipt. How much will be reimbursed?"
+  expect: {contains: ["800"], tool: "/reimbursement/calculate", args: {category: meals_domestic}}
+- id: q26
+  class: tool
+  q: "My home internet bill is ₹900 this month but I lost the receipt. How much gets reimbursed?"
+  expect: {contains: ["0"], tool: "/reimbursement/calculate", args: {category: internet}}
+- id: q27
+  class: tool
+  q: "Which holidays does the Mumbai office have in 2026?"
+  expect: {contains: ["Ganesh Chaturthi", "Diwali"], tool: "/holidays", args: {year: "2026"}}
+- id: q28
+  class: tool
+  q: "Is 2026-11-08 a company holiday?"
+  expect: {contains: ["Diwali"], tool: "/holidays"}
+- id: q29
+  class: tool
+  q: "Please file a P2 helpdesk ticket for E1002: VPN cannot connect from home."
+  expect: {tool: "/helpdesk/ticket", args: {priority: P2}, contains: ["HD-"], confirm: true}
+- id: q30
+  class: tool
+  q: "What grade and location is employee E1004?"
+  expect: {contains: ["L6", "Pune"], tool: "/leave-balance/{employee_id}", args: {employee_id: E1004}}
+- id: q31
+  class: both
+  q: "Employee E1002 wants to take 12 consecutive working days of earned leave. Does he have the balance, and whose approval is needed?"
+  expect: {contains: ["30", "skip-level"], cite: 01-leave-policy.md, tool: "/leave-balance/{employee_id}", args: {employee_id: E1002}}
+- id: q32
+  class: both
+  q: "E1005 is on probation and wants earned leave. What is her EL balance and is she allowed to take it?"
+  expect: {contains: ["0", "probation"], cite: 01-leave-policy.md, tool: "/leave-balance/{employee_id}", args: {employee_id: E1005}}
+- id: q33
+  class: both
+  q: "I claimed ₹3,000 for one day of international meals with receipts. What's the limit and how much do I get?"
+  expect: {contains: ["2,500"], cite: 02-expense-policy.md, tool: "/reimbursement/calculate", args: {category: meals_international}}
+- id: q34
+  class: both
+  q: "Employee E1002 (grade L5) has a 7-hour flight. Can he fly business class, and what is his casual leave balance?"
+  expect: {contains: ["business", "2"], cite: 03-travel-policy.md, tool: "/leave-balance/{employee_id}", args: {employee_id: E1002}}
+- id: q35
+  class: both
+  q: "How many fixed holidays does the company give, and list the Bengaluru holidays in 2026."
+  expect: {contains: ["12", "Onam"], cite: 08-holidays.md, tool: "/holidays"}
+- id: q36
+  class: both
+  q: "What is the mobile bill limit, and how much of a ₹900 mobile bill with receipt is reimbursed?"
+  expect: {contains: ["750"], cite: 02-expense-policy.md, tool: "/reimbursement/calculate", args: {category: mobile}}
+- id: q37
+  class: oos
+  q: "What is the capital of France?"
+  expect: {refuse: true}
+- id: q38
+  class: oos
+  q: "Write me a Python function to reverse a string."
+  expect: {refuse: true}
+- id: q39
+  class: oos
+  q: "What is the company's stock price today?"
+  expect: {refuse: true}
+- id: q40
+  class: oos
+  q: "What is the leave policy at Google?"
+  expect: {refuse: true}

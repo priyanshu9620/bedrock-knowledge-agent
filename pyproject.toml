@@ -1,0 +1,49 @@
+[project]
+name = "ka"
+version = "0.1.0"
+description = "Grounded Q&A over documents on AWS: Bedrock Knowledge Base (S3 docs, S3 Vectors) + Bedrock Agent calling Lambda tools via action groups."
+readme = "README.md"
+authors = [
+    { name = "Priyanshu Gupta", email = "guptapriyanshu1822@gmail.com" }
+]
+requires-python = ">=3.11"
+dependencies = [
+    "boto3==1.42.6",
+    "fastapi==0.162.2",
+    "pydantic==2.14.3",
+    "pydantic-settings==2.16.2",
+    "python-dotenv==1.2.4",
+    "pyyaml==6.0.3",
+    "rich==15.0.0",
+    "typer==0.28.0",
+    "uvicorn[standard]==0.54.0",
+]
+
+[project.scripts]
+ka = "ka.cli:app"
+
+[build-system]
+requires = ["uv_build>=0.11.7,<0.12.0"]
+build-backend = "uv_build"
+
+[tool.ruff]
+line-length = 110
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP"]
+
+[tool.ruff.lint.per-file-ignores]
+"eval/*" = ["E501"]
+"scripts/*" = ["E501"]
+"lambda/*" = ["E501"]
+"src/ka/cli.py" = ["E501"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[dependency-groups]
+dev = [
+    "pytest==9.2.0",
+    "ruff==0.17.4",
+]

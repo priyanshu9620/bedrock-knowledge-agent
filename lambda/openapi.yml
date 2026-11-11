@@ -1,0 +1,90 @@
+openapi: 3.0.0
+info:
+  title: Meridian Labs people-ops tools
+  version: "1.0"
+  description: Live data the handbook cannot answer — leave balances, reimbursement math, holiday lists, helpdesk tickets.
+paths:
+  /leave-balance/{employee_id}:
+    get:
+      operationId: getLeaveBalance
+      summary: Get an employee's current leave balance (CL, SL, EL days), grade and location.
+      description: Use when the user asks how much leave they or an employee has left. Requires the employee id (format E1234).
+      parameters:
+        - name: employee_id
+          in: path
+          required: true
+          description: Employee id, e.g. E1001
+          schema: { type: string }
+      responses:
+        "200":
+          description: balance
+          content:
+            application/json:
+              schema: { type: object }
+  /reimbursement/calculate:
+    post:
+      operationId: calculateReimbursement
+      summary: Compute the approved reimbursement amount for an expense under the expense policy caps.
+      description: Use when the user asks how much of an expense will be reimbursed. Categories: meals_domestic, meals_international, internet, mobile, cab, team_outing.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [category, amount_inr, has_receipt]
+              properties:
+                category: { type: string, description: "meals_domestic | meals_international | internet | mobile | cab | team_outing" }
+                amount_inr: { type: number, description: "amount claimed in INR" }
+                has_receipt: { type: boolean, description: "whether a receipt is attached" }
+                days: { type: integer, description: "number of days for per-day categories (default 1)" }
+      responses:
+        "200":
+          description: approved amount
+          content:
+            application/json:
+              schema: { type: object }
+  /holidays:
+    get:
+      operationId: getHolidayCalendar
+      summary: List company holidays for a year, optionally for a city/region.
+      description: Use when the user asks which days are holidays or whether a date is a holiday.
+      parameters:
+        - name: year
+          in: query
+          required: true
+          schema: { type: integer }
+        - name: region
+          in: query
+          required: false
+          description: Bengaluru | Mumbai | Delhi | Pune | Chennai | all
+          schema: { type: string }
+      responses:
+        "200":
+          description: holidays
+          content:
+            application/json:
+              schema: { type: object }
+  /helpdesk/ticket:
+    post:
+      operationId: fileHelpdeskTicket
+      summary: File a helpdesk ticket (IT, people-ops or incident tracking). This creates a record — confirm with the user first.
+      description: Use only when the user explicitly asks to file/raise/open a ticket. Ask for confirmation before calling.
+      x-requireConfirmation: ENABLED
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [summary]
+              properties:
+                summary: { type: string }
+                priority: { type: string, description: "P1 | P2 | P3 | P4 (default P3)" }
+                requester_id: { type: string, description: "employee id of the requester if known" }
+      responses:
+        "200":
+          description: ticket
+          content:
+            application/json:
+              schema: { type: object }

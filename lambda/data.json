@@ -1,0 +1,28 @@
+{
+  "employees": {
+    "E1001": {"name": "Asha Rao", "grade": "L3", "location": "Bengaluru", "leave": {"CL": 7, "SL": 9, "EL": 21.5}},
+    "E1002": {"name": "Ravi Menon", "grade": "L5", "location": "Mumbai", "leave": {"CL": 2, "SL": 10, "EL": 30}},
+    "E1003": {"name": "Meera Iyer", "grade": "L2", "location": "Delhi", "leave": {"CL": 12, "SL": 4, "EL": 6}},
+    "E1004": {"name": "Karan Shah", "grade": "L6", "location": "Pune", "leave": {"CL": 0, "SL": 10, "EL": 12}},
+    "E1005": {"name": "Nisha Verma", "grade": "L1", "location": "Chennai", "leave": {"CL": 10, "SL": 10, "EL": 0}}
+  },
+  "reimbursement_caps": {
+    "meals_domestic": {"cap_inr": 800, "per": "day"},
+    "meals_international": {"cap_inr": 2500, "per": "day"},
+    "internet": {"cap_inr": 1000, "per": "month"},
+    "mobile": {"cap_inr": 750, "per": "month"},
+    "cab": {"cap_inr": null, "per": "ride", "receipt_above_inr": 300},
+    "team_outing": {"cap_inr": 1500, "per": "person-quarter"}
+  },
+  "receipt_required_above_inr": 500,
+  "holidays": {
+    "2026": {
+      "all": [["2026-01-01", "New Year's Day"], ["2026-01-14", "Makar Sankranti / Pongal"], ["2026-01-26", "Republic Day"], ["2026-03-04", "Holi"], ["2026-04-03", "Good Friday"], ["2026-05-01", "May Day"], ["2026-08-15", "Independence Day"], ["2026-10-02", "Gandhi Jayanti"], ["2026-10-20", "Dussehra"], ["2026-11-08", "Diwali"], ["2026-12-25", "Christmas"]],
+      "Mumbai": [["2026-09-14", "Ganesh Chaturthi"]],
+      "Pune": [["2026-09-14", "Ganesh Chaturthi"]],
+      "Bengaluru": [["2026-09-14", "Onam"]],
+      "Chennai": [["2026-09-14", "Onam"]],
+      "Delhi": [["2026-09-14", "Regional holiday"]]
+    }
+  }
+}
