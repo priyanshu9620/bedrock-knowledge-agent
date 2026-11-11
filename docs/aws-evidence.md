@@ -17,3 +17,11 @@ Fixed during the session (notes P-6, P-7): the api Lambda handler path (`ka.lamb
 mirrored in `infra/main.tf`, so the next `tofu plan` shows no drift.
 
 Evaluation: see `eval/report.md` (filled after `make eval` + `make report`).
+
+## Evaluation (run 20261111-173336, through S3 Vectors + the tools Lambda)
+**40/40 questions passed** (kb 22/22 · tool 8/8 · both 6/6 · oos 4/4) · retrieval top-3 hit rate 1.0 · p50 7.4 s / p95 17.7 s ·
+1.9 LLM calls and 2,497 in / 66 out tokens per question · ≈ $0.00028/question at list price (free tier: $0).
+The run first scored 39/40: q26's answer "the reimbursement amount is ₹0." failed a whole-number match because of the
+sentence-ending period — a scorer bug (notes P-8), fixed with a unit test and re-scored from the stored answers
+(`eval/rescore.py`); the model outputs were not touched.
+Cost Explorer after the session: month-to-date $0.0000.

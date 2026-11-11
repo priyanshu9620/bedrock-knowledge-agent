@@ -31,7 +31,8 @@ def norm(s: str) -> str:
 def contains(answer: str, needle: str) -> bool:
     a, n = norm(answer), norm(needle)
     if re.fullmatch(r"[\d.]+", n):  # bare number: must appear as a whole number token
-        return re.search(rf"(?<![\d.]){re.escape(n)}(?![\d.])", a) is not None
+        # whole-number token: not glued to other digits; a sentence-ending "." or a decimal that is just "." is fine
+        return re.search(rf"(?<![\d.]){re.escape(n)}(?!\d|\.\d)", a) is not None
     return n in a
 
 

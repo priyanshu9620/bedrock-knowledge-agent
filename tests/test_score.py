@@ -10,6 +10,8 @@ def test_contains_is_number_and_currency_tolerant():
     assert contains("The cover is Rs. 5,00,000", "5,00,000")
     assert not contains("You get 120 days", "12")  # whole-number match only
     assert contains("Tuesday to Thursday are office days", "Tuesday")
+    assert contains("the reimbursement amount is ₹0.", "0")  # sentence-ending period (eval q26)
+    assert not contains("costs 0.5 per unit", "0")  # decimal: 0.5 is not 0
 
 
 def test_kb_question_scoring():

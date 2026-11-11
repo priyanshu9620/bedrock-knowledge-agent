@@ -1,5 +1,13 @@
 # Progress (newest first)
 
+## 2026-11-12 — AWS session done: ingest, public URL, eval 40/40; docs + interview prep written; destroy pending
+- User applied v1 (28 resources). `make env` (after fixing write_env), `ka ingest --source s3` → S3 Vectors; retrieve ok;
+  CLI kb + tool answers via S3 Vectors + Lambda; Function URL fixed (handler path, P-6) → /healthz 200, 401 without token,
+  tool question answered publicly (24.7 s). Gemini 503s → retries + fallback model (P-7).
+- **Eval (S3 Vectors + Lambda, gemini-3.5-flash-lite): 40/40 after a scorer fix (P-8; 39/40 raw), retrieval top-3 1.0,
+  p50 7.4 s / p95 17.7 s, 1.9 LLM calls, 2,497/66 tokens per question, ≈$0.00028/q at list price. Cost Explorer: $0.0000.**
+- Docs: GUIDE, RUNBOOK (v1), DEMO, BOOTSTRAP, INTERVIEW_PREP 01–06, aws-evidence, RESUME.md, README rewritten for v1.
+
 ## 2026-11-12 — local eval (scorer validation): 17/17 passed before the Gemini daily quota ran out (P-5)
 - `eval/run_eval.py` against the local index: q01–q17 (all kb) PASS, p50 ≈ 3.5 s, 2 LLM calls and ~2.7k/50 tokens per
   question; then 429 on gemini-3.5-flash-lite. Switched to gemini-3.1-flash-lite for the AWS run. Report/runbook written.

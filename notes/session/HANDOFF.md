@@ -14,9 +14,9 @@ Bedrock Knowledge Agent: RAG Assistant | AWS Bedrock, S3, Lambda · 2026
 Numbers get measured (D-7) and the lines rewritten at the end.
 
 ## Where we are
-**2026-11-12 early:** Phases 0 + 1 done and pushed (private repo). `tofu plan` = 31 resources. **BLOCKED on the user:**
-(1) upgrade the AWS account from the Free plan to the Paid plan (Bedrock quotas are 0 and not adjustable on Free — P-1);
-(2) `make infra-apply`. Then Claude runs `make env`, `make kb-sync`, smoke asks, `make eval`, `make report`; user destroys.
+**2026-11-12 night:** v1 (Gemini + S3 Vectors + Lambda, D-15…D-19) built, deployed, evaluated 40/40, documented. **Pending:**
+user `make infra-destroy` (+ `make secrets-pack` + push); Claude verifies the account is empty. Then flip the repo public.
+Bedrock v2 parked: `docs/V2-BEDROCK.md` + `infra-bedrock-v2/`.
 
 ## Audit facts (read-only probes, profile `shopease`, ap-southeast-2)
 - Allowed by the SCP: bedrock (81 models), bedrock-agent (KBs, agents), lambda, s3, opensearchserverless, s3vectors, iam roles.
@@ -32,4 +32,4 @@ Numbers get measured (D-7) and the lines rewritten at the end.
    Claude verifies afterwards. Target total spend for the whole project < $2.
 
 ## Single next command
-User: upgrade plan in the console, then `cd ~/Desktop/bedrock-knowledge-agent && make infra-plan && make infra-apply`.
+User: `cd ~/Desktop/bedrock-knowledge-agent && make infra-destroy && SECRETS_PASSPHRASE='…' make secrets-pack && git add secrets.tar.enc && git commit -m 'chore: secrets' && git push`

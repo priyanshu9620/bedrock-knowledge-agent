@@ -85,6 +85,11 @@ def main() -> None:
                 "est_cost_usd_per_question_at_list_price",
             )
         }
+    for b, d in rs.items():
+        if d.get("rescored_at"):
+            md.append(
+                f"_{b}: answers recorded in run {d['run_id']}, re-scored at {d['rescored_at']} after a scorer fix (eval/rescore.py); model outputs unchanged._"
+            )
     md.append("")
     if rs:
         names = list(rs)

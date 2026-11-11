@@ -1,0 +1,1967 @@
+{
+ "run_id": "20261111-173336",
+ "model": "gemini-3.5-flash-lite",
+ "embeddings": "gemini-embedding-001",
+ "backend": "S3 Vectors + Lambda",
+ "questions": 40,
+ "completed": 40,
+ "errors": [],
+ "passed": 40,
+ "by_class": {
+  "kb": {
+   "n": 22,
+   "passed": 22
+  },
+  "tool": {
+   "n": 8,
+   "passed": 8
+  },
+  "both": {
+   "n": 6,
+   "passed": 6
+  },
+  "oos": {
+   "n": 4,
+   "passed": 4
+  }
+ },
+ "per_check_pass_rate": {
+  "cited_right_doc": 1.429,
+  "confirmation_requested": 40.0,
+  "facts_present": 1.111,
+  "no_tool_call": 10.0,
+  "no_unneeded_tool": 1.818,
+  "refused": 10.0,
+  "right_tool_called": 2.857,
+  "tool_args_correct": 3.333
+ },
+ "retrieval_top3_hit_rate": 1.0,
+ "latency_s": {
+  "p50": 7.39,
+  "p95": 17.73,
+  "mean": 7.89
+ },
+ "llm_calls_per_question": 1.9,
+ "tokens_per_question": {
+  "input": 2497,
+  "output": 66
+ },
+ "est_cost_usd_per_question_at_list_price": 0.00028,
+ "rows": [
+  {
+   "id": "q01",
+   "class": "kb",
+   "question": "How many casual leave days do employees get per year?",
+   "answer": "Employees receive 12 casual leave days per calendar year, which are credited in full on 1 January and do not carry forward (from `01-leave-policy.md`).",
+   "citations": [
+    {
+     "doc": "01-leave-policy.md",
+     "snippet": "# Leave Policy\n\n## Entitlements (per calendar year)\n- Casual leave (CL): 12 days per year, credited in full on 1 January. Casual leave does not carry forward.\n- Sick leave (SL): 10 days per year. A me",
+     "score": 0.7014
+    },
+    {
+     "doc": "08-holidays.md",
+     "snippet": "# Holiday Calendar 2026\n\nMeridian Labs observes 12 fixed holidays per year plus 2 optional holidays that each employee chooses from the\noptional list. Fixed holidays for 2026 (all locations unless not",
+     "score": 0.6393
+    },
+    {
+     "doc": "12-glossary.md",
+     "snippet": "# Glossary\n\n- CL — casual leave. SL — sick leave. EL — earned leave.\n- CTC — cost to company, the total annual compensation.\n- L-grades — engineering levels L1 (junior) to L7 (principal). L5 is senior",
+     "score": 0.634
+    },
+    {
+     "doc": "07-remote-work-policy.md",
+     "snippet": "# Remote and Hybrid Work Policy\n\n- Hybrid schedule: 3 days a week in the office, Tuesday to Thursday. Monday and Friday are remote by default.\n- Core collaboration hours are 11:00 to 16:00 IST; everyo",
+     "score": 0.6148
+    }
+   ],
+   "tool_calls": [],
+   "retrieved_docs": [
+    "01-leave-policy.md",
+    "08-holidays.md",
+    "12-glossary.md",
+    "07-remote-work-policy.md"
+   ],
+   "retrieval_top3": [
+    "01-leave-policy.md",
+    "08-holidays.md",
+    "12-glossary.md"
+   ],
+   "retrieval_hit_top3": true,
+   "checks": {
+    "facts_present": true,
+    "cited_right_doc": true,
+    "no_unneeded_tool": true,
+    "pass": true
+   },
+   "latency_s": 7.71,
+   "llm_calls": 2,
+   "input_tokens": 2878,
+   "output_tokens": 59,
+   "confirmation_requested": false
+  },
+  {
+   "id": "q02",
+   "class": "kb",
+   "question": "What is the maximum earned leave balance that can be carried forward?",
+   "answer": "Unused earned leave can be carried forward up to a maximum balance of 30 days, and any earned leave above 30 days lapses on 31 December.",
+   "citations": [
+    {
+     "doc": "01-leave-policy.md",
+     "snippet": "# Leave Policy\n\n## Entitlements (per calendar year)\n- Casual leave (CL): 12 days per year, credited in full on 1 January. Casual leave does not carry forward.\n- Sick leave (SL): 10 days per year. A me",
+     "score": 0.6467
+    },
+    {
+     "doc": "12-glossary.md",
+     "snippet": "# Glossary\n\n- CL — casual leave. SL — sick leave. EL — earned leave.\n- CTC — cost to company, the total annual compensation.\n- L-grades — engineering levels L1 (junior) to L7 (principal). L5 is senior",
+     "score": 0.5859
+    },
+    {
+     "doc": "08-holidays.md",
+     "snippet": "# Holiday Calendar 2026\n\nMeridian Labs observes 12 fixed holidays per year plus 2 optional holidays that each employee chooses from the\noptional list. Fixed holidays for 2026 (all locations unless not",
+     "score": 0.5744
+    },
+    {
+     "doc": "09-benefits.md",
+     "snippet": "# Benefits\n\n- Health insurance: ₹5,00,000 family floater covering the employee, spouse and up to 2 children. An optional\n  top-up of ₹5,00,000 and optional parental cover can be bought at the employee",
+     "score": 0.5664
+    }
+   ],
+   "tool_calls": [],
+   "retrieved_docs": [
+    "01-leave-policy.md",
+    "12-glossary.md",
+    "08-holidays.md",
+    "09-benefits.md"
+   ],
+   "retrieval_top3": [
+    "01-leave-policy.md",
+    "12-glossary.md",
+    "08-holidays.md"
+   ],
+   "retrieval_hit_top3": true,
+   "checks": {
+    "facts_present": true,
+    "cited_right_doc": true,
+    "no_unneeded_tool": true,
+    "pass": true
+   },
+   "latency_s": 3.15,
+   "llm_calls": 2,
+   "input_tokens": 2945,
+   "output_tokens": 57,
+   "confirmation_requested": false
+  },
+  {
+   "id": "q03",
+   "class": "kb",
+   "question": "How long is maternity leave?",
+   "answer": "Maternity leave is 26 weeks of paid leave.",
+   "citations": [
+    {
+     "doc": "01-leave-policy.md",
+     "snippet": "# Leave Policy\n\n## Entitlements (per calendar year)\n- Casual leave (CL): 12 days per year, credited in full on 1 January. Casual leave does not carry forward.\n- Sick leave (SL): 10 days per year. A me",
+     "score": 0.6576
+    },
+    {
+     "doc": "12-glossary.md",
+     "snippet": "# Glossary\n\n- CL — casual leave. SL — sick leave. EL — earned leave.\n- CTC — cost to company, the total annual compensation.\n- L-grades — engineering levels L1 (junior) to L7 (principal). L5 is senior",
+     "score": 0.5913
+    },
+    {
+     "doc": "05-onboarding.md",
+     "snippet": "# Onboarding\n\n- Day 1: laptop, accounts and a welcome session. An onboarding buddy is assigned for the first 90 days.\n- Every new joiner has a 30/60/90-day plan agreed with the manager in the first we",
+     "score": 0.591
+    },
+    {
+     "doc": "08-holidays.md",
+     "snippet": "# Holiday Calendar 2026\n\nMeridian Labs observes 12 fixed holidays per year plus 2 optional holidays that each employee chooses from the\noptional list. Fixed holidays for 2026 (all locations unless not",
+     "score": 0.5861
+    }
+   ],
+   "tool_calls": [],
+   "retrieved_docs": [
+    "01-leave-policy.md",
+    "12-glossary.md",
+    "05-onboarding.md",
+    "08-holidays.md"
+   ],
+   "retrieval_top3": [
+    "01-leave-policy.md",
+    "05-onboarding.md",
+    "09-benefits.md"
+   ],
+   "retrieval_hit_top3": true,
+   "checks": {
+    "facts_present": true,
+    "cited_right_doc": true,
+    "no_unneeded_tool": true,
+    "pass": true
+   },
+   "latency_s": 3.61,
+   "llm_calls": 2,
+   "input_tokens": 2858,
+   "output_tokens": 32,
+   "confirmation_requested": false
+  },
+  {
+   "id": "q04",
+   "class": "kb",
+   "question": "How many working days in advance must planned leave be applied?",
+   "answer": "Planned leave must be applied at least 5 working days in advance in the HR portal.",
+   "citations": [
+    {
+     "doc": "01-leave-policy.md",
+     "snippet": "# Leave Policy\n\n## Entitlements (per calendar year)\n- Casual leave (CL): 12 days per year, credited in full on 1 January. Casual leave does not carry forward.\n- Sick leave (SL): 10 days per year. A me",
+     "score": 0.655
+    },
+    {
+     "doc": "12-glossary.md",
+     "snippet": "# Glossary\n\n- CL — casual leave. SL — sick leave. EL — earned leave.\n- CTC — cost to company, the total annual compensation.\n- L-grades — engineering levels L1 (junior) to L7 (principal). L5 is senior",
+     "score": 0.6167
+    },
+    {
+     "doc": "08-holidays.md",
+     "snippet": "# Holiday Calendar 2026\n\nMeridian Labs observes 12 fixed holidays per year plus 2 optional holidays that each employee chooses from the\noptional list. Fixed holidays for 2026 (all locations unless not",
+     "score": 0.6152
+    },
+    {
+     "doc": "07-remote-work-policy.md",
+     "snippet": "# Remote and Hybrid Work Policy\n\n- Hybrid schedule: 3 days a week in the office, Tuesday to Thursday. Monday and Friday are remote by default.\n- Core collaboration hours are 11:00 to 16:00 IST; everyo",
+     "score": 0.6144
+    }
+   ],
+   "tool_calls": [],
+   "retrieved_docs": [
+    "01-leave-policy.md",
+    "12-glossary.md",
+    "08-holidays.md",
+    "07-remote-work-policy.md"
+   ],
+   "retrieval_top3": [
+    "01-leave-policy.md",
+    "12-glossary.md",
+    "07-remote-work-policy.md"
+   ],
+   "retrieval_hit_top3": true,
+   "checks": {
+    "facts_present": true,
+    "cited_right_doc": true,
+    "no_unneeded_tool": true,
+    "pass": true
+   },
+   "latency_s": 3.01,
+   "llm_calls": 2,
+   "input_tokens": 2882,
+   "output_tokens": 41,
+   "confirmation_requested": false
+  },
+  {
+   "id": "q05",
+   "class": "kb",
+   "question": "What is the daily meal limit on domestic travel?",
+   "answer": "The daily meal limit for domestic travel is up to ₹800 per day. Receipts are mandatory for any expense above ₹500, while a self-declaration is accepted for amounts below ₹500.",
+   "citations": [
+    {
+     "doc": "02-expense-policy.md",
+     "snippet": "# Expense Reimbursement Policy\n\n## Limits\n- Meals while travelling: up to ₹800 per day for domestic travel and ₹2,500 per day for international travel.\n- Local cab or auto: actuals; a receipt is requi",
+     "score": 0.7071
+    },
+    {
+     "doc": "03-travel-policy.md",
+     "snippet": "# Travel Policy\n\n- Flights: economy class for flights shorter than 6 hours. Business class is allowed for flights of 6 hours or\n  longer, only for employees at grade L5 and above.\n- Hotels: up to ₹6,0",
+     "score": 0.6876
+    },
+    {
+     "doc": "12-glossary.md",
+     "snippet": "# Glossary\n\n- CL — casual leave. SL — sick leave. EL — earned leave.\n- CTC — cost to company, the total annual compensation.\n- L-grades — engineering levels L1 (junior) to L7 (principal). L5 is senior",
+     "score": 0.5782
+    },
+    {
+     "doc": "01-leave-policy.md",
+     "snippet": "# Leave Policy\n\n## Entitlements (per calendar year)\n- Casual leave (CL): 12 days per year, credited in full on 1 January. Casual leave does not carry forward.\n- Sick leave (SL): 10 days per year. A me",
+     "score": 0.5754
+    }
+   ],
+   "tool_calls": [],
+   "retrieved_docs": [
+    "02-expense-policy.md",
+    "03-travel-policy.md",
+    "12-glossary.md",
+    "01-leave-policy.md"
+   ],
+   "retrieval_top3": [
+    "02-expense-policy.md",
+    "03-travel-policy.md",
+    "01-leave-policy.md"
+   ],
+   "retrieval_hit_top3": true,
+   "checks": {
+    "facts_present": true,
+    "cited_right_doc": true,
+    "no_unneeded_tool": true,
+    "pass": true
+   },
+   "latency_s": 3.49,
+   "llm_calls": 2,
+   "input_tokens": 2792,
+   "output_tokens": 66,
+   "confirmation_requested": false
+  },
+  {
+   "id": "q06",
+   "class": "kb",
+   "question": "Above what amount is a receipt mandatory for expenses?",
+   "answer": "Receipts are mandatory for any expense above ₹500, while a self-declaration is accepted for amounts below ₹500. For local cab or auto rides specifically, a receipt is required for any single ride above ₹300.",
+   "citations": [
+    {
+     "doc": "02-expense-policy.md",
+     "snippet": "# Expense Reimbursement Policy\n\n## Limits\n- Meals while travelling: up to ₹800 per day for domestic travel and ₹2,500 per day for international travel.\n- Local cab or auto: actuals; a receipt is requi",
+     "score": 0.6717
+    },
+    {
+     "doc": "03-travel-policy.md",
+     "snippet": "# Travel Policy\n\n- Flights: economy class for flights shorter than 6 hours. Business class is allowed for flights of 6 hours or\n  longer, only for employees at grade L5 and above.\n- Hotels: up to ₹6,0",
+     "score": 0.6151
+    },
+    {
+     "doc": "10-code-of-conduct.md",
+     "snippet": "# Code of Conduct\n\n- Harassment of any kind is not tolerated. Complaints under POSH go to the Internal Committee (IC) at\n  posh-ic@meridianlabs.example and are acknowledged within 7 days.\n- Gifts from",
+     "score": 0.591
+    },
+    {
+     "doc": "09-benefits.md",
+     "snippet": "# Benefits\n\n- Health insurance: ₹5,00,000 family floater covering the employee, spouse and up to 2 children. An optional\n  top-up of ₹5,00,000 and optional parental cover can be bought at the employee",
+     "score": 0.5714
+    }
+   ],
+   "tool_calls": [],
+   "retrieved_docs": [
+    "02-expense-policy.md",
+    "03-travel-policy.md",
+    "10-code-of-conduct.md",
+    "09-benefits.md"
+   ],
+   "retrieval_top3": [
+    "02-expense-policy.md",
+    "03-travel-policy.md",
+    "10-code-of-conduct.md"
+   ],
+   "retrieval_hit_top3": true,
+   "checks": {
+    "facts_present": true,
+    "cited_right_doc": true,
+    "no_unneeded_tool": true,
+    "pass": true
+   },
+   "latency_s": 14.44,
+   "llm_calls": 2,
+   "input_tokens": 2713,
+   "output_tokens": 70,
+   "confirmation_requested": false
+  },
+  {
+   "id": "q07",
+   "class": "kb",
+   "question": "Within how many days must an expense claim be submitted?",
+   "answer": "Expense claims must be submitted within 30 days of the expense date, and older claims will be rejected.",
+   "citations": [
+    {
+     "doc": "02-expense-policy.md",
+     "snippet": "# Expense Reimbursement Policy\n\n## Limits\n- Meals while travelling: up to ₹800 per day for domestic travel and ₹2,500 per day for international travel.\n- Local cab or auto: actuals; a receipt is requi",
+     "score": 0.6456
+    },
+    {
+     "doc": "03-travel-policy.md",
+     "snippet": "# Travel Policy\n\n- Flights: economy class for flights shorter than 6 hours. Business class is allowed for flights of 6 hours or\n  longer, only for employees at grade L5 and above.\n- Hotels: up to ₹6,0",
+     "score": 0.6123
+    },
+    {
+     "doc": "08-holidays.md",
+     "snippet": "# Holiday Calendar 2026\n\nMeridian Labs observes 12 fixed holidays per year plus 2 optional holidays that each employee chooses from the\noptional list. Fixed holidays for 2026 (all locations unless not",
+     "score": 0.5876
+    },
+    {
+     "doc": "05-onboarding.md",
+     "snippet": "# Onboarding\n\n- Day 1: laptop, accounts and a welcome session. An onboarding buddy is assigned for the first 90 days.\n- Every new joiner has a 30/60/90-day plan agreed with the manager in the first we",
+     "score": 0.5816
+    }
+   ],
+   "tool_calls": [],
+   "retrieved_docs": [
+    "02-expense-policy.md",
+    "03-travel-policy.md",
+    "08-holidays.md",
+    "05-onboarding.md"
+   ],
+   "retrieval_top3": [
+    "02-expense-policy.md",
+    "03-travel-policy.md",
+    "05-onboarding.md"
+   ],
+   "retrieval_hit_top3": true,
+   "checks": {
+    "facts_present": true,
+    "cited_right_doc": true,
+    "no_unneeded_tool": true,
+    "pass": true
+   },
+   "latency_s": 11.97,
+   "llm_calls": 2,
+   "input_tokens": 2864,
+   "output_tokens": 43,
+   "confirmation_requested": false
+  },
+  {
+   "id": "q08",
+   "class": "kb",
+   "question": "Who is allowed to fly business class and on which flights?",
+   "answer": "Business class is allowed for flights of 6 hours or longer, and only for employees at grade L5 and above.",
+   "citations": [
+    {
+     "doc": "03-travel-policy.md",
+     "snippet": "# Travel Policy\n\n- Flights: economy class for flights shorter than 6 hours. Business class is allowed for flights of 6 hours or\n  longer, only for employees at grade L5 and above.\n- Hotels: up to ₹6,0",
+     "score": 0.6617
+    },
+    {
+     "doc": "02-expense-policy.md",
+     "snippet": "# Expense Reimbursement Policy\n\n## Limits\n- Meals while travelling: up to ₹800 per day for domestic travel and ₹2,500 per day for international travel.\n- Local cab or auto: actuals; a receipt is requi",
+     "score": 0.5628
+    },
+    {
+     "doc": "01-leave-policy.md",
+     "snippet": "# Leave Policy\n\n## Entitlements (per calendar year)\n- Casual leave (CL): 12 days per year, credited in full on 1 January. Casual leave does not carry forward.\n- Sick leave (SL): 10 days per year. A me",
+     "score": 0.5426
+    },
+    {
+     "doc": "00-about-this-handbook.md",
+     "snippet": "# Meridian Labs Employee Handbook — About\n\nMeridian Labs is a fictional software company used for this demo. This handbook is the single source of truth for\npeople policies. Where a policy and a manag",
+     "score": 0.5377
+    }
+   ],
+   "tool_calls": [],
+   "retrieved_docs": [
+    "03-travel-policy.md",
+    "02-expense-policy.md",
+    "01-leave-policy.md",
+    "00-about-this-handbook.md"
+   ],
+   "retrieval_top3": [
+    "03-travel-policy.md",
+    "02-expense-policy.md",
+    "01-leave-policy.md"
+   ],
+   "retrieval_hit_top3": true,
+   "checks": {
+    "facts_present": true,
+    "cited_right_doc": true,
+    "no_unneeded_tool": true,
+    "pass": true
+   },
+   "latency_s": 5.02,
+   "llm_calls": 2,
+   "input_tokens": 2770,
+   "output_tokens": 44,
+   "confirmation_requested": false
+  },
+  {
+   "id": "q09",
+   "class": "kb",
+   "question": "What is the hotel limit per night in a metro city?",
+   "answer": "The hotel limit per night in metro cities (Bengaluru, Delhi, Mumbai, Chennai, Hyderabad, Kolkata, and Pune) is up to ₹6,000 per night.",
+   "citations": [
+    {
+     "doc": "03-travel-policy.md",
+     "snippet": "# Travel Policy\n\n- Flights: economy class for flights shorter than 6 hours. Business class is allowed for flights of 6 hours or\n  longer, only for employees at grade L5 and above.\n- Hotels: up to ₹6,0",
+     "score": 0.6839
+    },
+    {
+     "doc": "02-expense-policy.md",
+     "snippet": "# Expense Reimbursement Policy\n\n## Limits\n- Meals while travelling: up to ₹800 per day for domestic travel and ₹2,500 per day for international travel.\n- Local cab or auto: actuals; a receipt is requi",
+     "score": 0.6324
+    },
+    {
+     "doc": "12-glossary.md",
+     "snippet": "# Glossary\n\n- CL — casual leave. SL — sick leave. EL — earned leave.\n- CTC — cost to company, the total annual compensation.\n- L-grades — engineering levels L1 (junior) to L7 (principal). L5 is senior",
+     "score": 0.5772
+    },
+    {
+     "doc": "07-remote-work-policy.md",
+     "snippet": "# Remote and Hybrid Work Policy\n\n- Hybrid schedule: 3 days a week in the office, Tuesday to Thursday. Monday and Friday are remote by default.\n- Core collaboration hours are 11:00 to 16:00 IST; everyo",
+     "score": 0.5751
+    }
+   ],
+   "tool_calls": [],
+   "retrieved_docs": [
+    "03-travel-policy.md",
+    "02-expense-policy.md",
+    "12-glossary.md",
+    "07-remote-work-policy.md"
+   ],
+   "retrieval_top3": [
+    "03-travel-policy.md",
+    "02-expense-policy.md",
+    "07-remote-work-policy.md"
+   ],
+   "retrieval_hit_top3": true,
+   "checks": {
+    "facts_present": true,
+    "cited_right_doc": true,
+    "no_unneeded_tool": true,
+    "pass": true
+   },
+   "latency_s": 10.76,
+   "llm_calls": 2,
+   "input_tokens": 2664,
+   "output_tokens": 59,
+   "confirmation_requested": false
+  },
+  {
+   "id": "q10",
+   "class": "kb",
+   "question": "How often must passwords be rotated and what is the minimum length?",
+   "answer": "Passwords must be at least 14 characters long and must be rotated every 90 days.",
+   "citations": [
+    {
+     "doc": "04-it-security-policy.md",
+     "snippet": "# IT Security Policy\n\n- Multi-factor authentication (MFA) is mandatory on all company accounts.\n- Passwords must be at least 14 characters and must be rotated every 90 days.\n- Laptops must have full-d",
+     "score": 0.644
+    },
+    {
+     "doc": "06-device-policy.md",
+     "snippet": "# Device Policy\n\n- Company laptops are refreshed every 3 years.\n- A lost or stolen device must be reported to IT within 24 hours so it can be remotely wiped.\n- If a device is lost through negligence, ",
+     "score": 0.5722
+    },
+    {
+     "doc": "11-incident-process.md",
+     "snippet": "# Production Incident Process\n\n- Severity levels: S1 (customer-facing outage), S2 (major degradation), S3 (minor issue), S4 (cosmetic).\n- S1 incidents must be acknowledged within 15 minutes and have a",
+     "score": 0.5472
+    },
+    {
+     "doc": "05-onboarding.md",
+     "snippet": "# Onboarding\n\n- Day 1: laptop, accounts and a welcome session. An onboarding buddy is assigned for the first 90 days.\n- Every new joiner has a 30/60/90-day plan agreed with the manager in the first we",
+     "score": 0.5382
+    }
+   ],
+   "tool_calls": [],
+   "retrieved_docs": [
+    "04-it-security-policy.md",
+    "06-device-policy.md",
+    "11-incident-process.md",
+    "05-onboarding.md"
+   ],
+   "retrieval_top3": [
+    "04-it-security-policy.md",
+    "06-device-policy.md",
+    "05-onboarding.md"
+   ],
+   "retrieval_hit_top3": true,
+   "checks": {
+    "facts_present": true,
+    "cited_right_doc": true,
+    "no_unneeded_tool": true,
+    "pass": true
+   },
+   "latency_s": 4.24,
+   "llm_calls": 2,
+   "input_tokens": 2536,
+   "output_tokens": 41,
+   "confirmation_requested": false
+  },
+  {
+   "id": "q11",
+   "class": "kb",
+   "question": "Where do I report a phishing email?",
+   "answer": "Suspected phishing emails must be reported to security@meridianlabs.example using the \"Report phishing\" button.",
+   "citations": [
+    {
+     "doc": "04-it-security-policy.md",
+     "snippet": "# IT Security Policy\n\n- Multi-factor authentication (MFA) is mandatory on all company accounts.\n- Passwords must be at least 14 characters and must be rotated every 90 days.\n- Laptops must have full-d",
+     "score": 0.609
+    },
+    {
+     "doc": "10-code-of-conduct.md",
+     "snippet": "# Code of Conduct\n\n- Harassment of any kind is not tolerated. Complaints under POSH go to the Internal Committee (IC) at\n  posh-ic@meridianlabs.example and are acknowledged within 7 days.\n- Gifts from",
+     "score": 0.578
+    },
+    {
+     "doc": "11-incident-process.md",
+     "snippet": "# Production Incident Process\n\n- Severity levels: S1 (customer-facing outage), S2 (major degradation), S3 (minor issue), S4 (cosmetic).\n- S1 incidents must be acknowledged within 15 minutes and have a",
+     "score": 0.5639
+    },
+    {
+     "doc": "06-device-policy.md",
+     "snippet": "# Device Policy\n\n- Company laptops are refreshed every 3 years.\n- A lost or stolen device must be reported to IT within 24 hours so it can be remotely wiped.\n- If a device is lost through negligence, ",
+     "score": 0.559
+    }
+   ],
+   "tool_calls": [],
+   "retrieved_docs": [
+    "04-it-security-policy.md",
+    "10-code-of-conduct.md",
+    "11-incident-process.md",
+    "06-device-policy.md"
+   ],
+   "retrieval_top3": [
+    "04-it-security-policy.md",
+    "10-code-of-conduct.md",
+    "06-device-policy.md"
+   ],
+   "retrieval_hit_top3": true,
+   "checks": {
+    "facts_present": true,
+    "cited_right_doc": true,
+    "no_unneeded_tool": true,
+    "pass": true
+   },
+   "latency_s": 3.1,
+   "llm_calls": 2,
+   "input_tokens": 2525,
+   "output_tokens": 45,
+   "confirmation_requested": false
+  },
+  {
+   "id": "q12",
+   "class": "kb",
+   "question": "How long is the probation period?",
+   "answer": "Probation lasts 6 months, with probation reviews held in month 3 and month 6 (source: `05-onboarding.md`).",
+   "citations": [
+    {
+     "doc": "05-onboarding.md",
+     "snippet": "# Onboarding\n\n- Day 1: laptop, accounts and a welcome session. An onboarding buddy is assigned for the first 90 days.\n- Every new joiner has a 30/60/90-day plan agreed with the manager in the first we",
+     "score": 0.6663
+    },
+    {
+     "doc": "12-glossary.md",
+     "snippet": "# Glossary\n\n- CL — casual leave. SL — sick leave. EL — earned leave.\n- CTC — cost to company, the total annual compensation.\n- L-grades — engineering levels L1 (junior) to L7 (principal). L5 is senior",
+     "score": 0.5909
+    },
+    {
+     "doc": "01-leave-policy.md",
+     "snippet": "# Leave Policy\n\n## Entitlements (per calendar year)\n- Casual leave (CL): 12 days per year, credited in full on 1 January. Casual leave does not carry forward.\n- Sick leave (SL): 10 days per year. A me",
+     "score": 0.5889
+    },
+    {
+     "doc": "07-remote-work-policy.md",
+     "snippet": "# Remote and Hybrid Work Policy\n\n- Hybrid schedule: 3 days a week in the office, Tuesday to Thursday. Monday and Friday are remote by default.\n- Core collaboration hours are 11:00 to 16:00 IST; everyo",
+     "score": 0.5749
+    }
+   ],
+   "tool_calls": [],
+   "retrieved_docs": [
+    "05-onboarding.md",
+    "12-glossary.md",
+    "01-leave-policy.md",
+    "07-remote-work-policy.md"
+   ],
+   "retrieval_top3": [
+    "05-onboarding.md",
+    "12-glossary.md",
+    "01-leave-policy.md"
+   ],
+   "retrieval_hit_top3": true,
+   "checks": {
+    "facts_present": true,
+    "cited_right_doc": true,
+    "no_unneeded_tool": true,
+    "pass": true
+   },
+   "latency_s": 2.95,
+   "llm_calls": 2,
+   "input_tokens": 2652,
+   "output_tokens": 51,
+   "confirmation_requested": false
+  },
+  {
+   "id": "q13",
+   "class": "kb",
+   "question": "Within how many hours must a lost laptop be reported?",
+   "answer": "A lost or stolen device must be reported to IT within 24 hours so it can be remotely wiped (Source: `06-device-policy.md`).",
+   "citations": [
+    {
+     "doc": "06-device-policy.md",
+     "snippet": "# Device Policy\n\n- Company laptops are refreshed every 3 years.\n- A lost or stolen device must be reported to IT within 24 hours so it can be remotely wiped.\n- If a device is lost through negligence, ",
+     "score": 0.6676
+    },
+    {
+     "doc": "01-leave-policy.md",
+     "snippet": "# Leave Policy\n\n## Entitlements (per calendar year)\n- Casual leave (CL): 12 days per year, credited in full on 1 January. Casual leave does not carry forward.\n- Sick leave (SL): 10 days per year. A me",
+     "score": 0.5805
+    },
+    {
+     "doc": "07-remote-work-policy.md",
+     "snippet": "# Remote and Hybrid Work Policy\n\n- Hybrid schedule: 3 days a week in the office, Tuesday to Thursday. Monday and Friday are remote by default.\n- Core collaboration hours are 11:00 to 16:00 IST; everyo",
+     "score": 0.5787
+    },
+    {
+     "doc": "02-expense-policy.md",
+     "snippet": "# Expense Reimbursement Policy\n\n## Limits\n- Meals while travelling: up to ₹800 per day for domestic travel and ₹2,500 per day for international travel.\n- Local cab or auto: actuals; a receipt is requi",
+     "score": 0.5719
+    }
+   ],
+   "tool_calls": [],
+   "retrieved_docs": [
+    "06-device-policy.md",
+    "01-leave-policy.md",
+    "07-remote-work-policy.md",
+    "02-expense-policy.md"
+   ],
+   "retrieval_top3": [
+    "06-device-policy.md",
+    "04-it-security-policy.md",
+    "05-onboarding.md"
+   ],
+   "retrieval_hit_top3": true,
+   "checks": {
+    "facts_present": true,
+    "cited_right_doc": true,
+    "no_unneeded_tool": true,
+    "pass": true
+   },
+   "latency_s": 3.96,
+   "llm_calls": 2,
+   "input_tokens": 2723,
+   "output_tokens": 54,
+   "confirmation_requested": false
+  },
+  {
+   "id": "q14",
+   "class": "kb",
+   "question": "Which days of the week are office days under the hybrid policy?",
+   "answer": "Under the hybrid work policy, the office days are Tuesday to Thursday (3 days a week), with Monday and Friday being remote by default.",
+   "citations": [
+    {
+     "doc": "07-remote-work-policy.md",
+     "snippet": "# Remote and Hybrid Work Policy\n\n- Hybrid schedule: 3 days a week in the office, Tuesday to Thursday. Monday and Friday are remote by default.\n- Core collaboration hours are 11:00 to 16:00 IST; everyo",
+     "score": 0.7689
+    },
+    {
+     "doc": "12-glossary.md",
+     "snippet": "# Glossary\n\n- CL — casual leave. SL — sick leave. EL — earned leave.\n- CTC — cost to company, the total annual compensation.\n- L-grades — engineering levels L1 (junior) to L7 (principal). L5 is senior",
+     "score": 0.6335
+    },
+    {
+     "doc": "08-holidays.md",
+     "snippet": "# Holiday Calendar 2026\n\nMeridian Labs observes 12 fixed holidays per year plus 2 optional holidays that each employee chooses from the\noptional list. Fixed holidays for 2026 (all locations unless not",
+     "score": 0.6313
+    },
+    {
+     "doc": "03-travel-policy.md",
+     "snippet": "# Travel Policy\n\n- Flights: economy class for flights shorter than 6 hours. Business class is allowed for flights of 6 hours or\n  longer, only for employees at grade L5 and above.\n- Hotels: up to ₹6,0",
+     "score": 0.6309
+    }
+   ],
+   "tool_calls": [],
+   "retrieved_docs": [
+    "07-remote-work-policy.md",
+    "12-glossary.md",
+    "08-holidays.md",
+    "03-travel-policy.md"
+   ],
+   "retrieval_top3": [
+    "07-remote-work-policy.md",
+    "08-holidays.md",
+    "12-glossary.md"
+   ],
+   "retrieval_hit_top3": true,
+   "checks": {
+    "facts_present": true,
+    "cited_right_doc": true,
+    "no_unneeded_tool": true,
+    "pass": true
+   },
+   "latency_s": 13.4,
+   "llm_calls": 2,
+   "input_tokens": 2789,
+   "output_tokens": 49,
+   "confirmation_requested": false
+  },
+  {
+   "id": "q15",
+   "class": "kb",
+   "question": "How much is the one-time home-office stipend?",
+   "answer": "A one-time home-office stipend of ₹15,000 is available to set up a desk, chair, or monitor.",
+   "citations": [
+    {
+     "doc": "07-remote-work-policy.md",
+     "snippet": "# Remote and Hybrid Work Policy\n\n- Hybrid schedule: 3 days a week in the office, Tuesday to Thursday. Monday and Friday are remote by default.\n- Core collaboration hours are 11:00 to 16:00 IST; everyo",
+     "score": 0.6668
+    },
+    {
+     "doc": "02-expense-policy.md",
+     "snippet": "# Expense Reimbursement Policy\n\n## Limits\n- Meals while travelling: up to ₹800 per day for domestic travel and ₹2,500 per day for international travel.\n- Local cab or auto: actuals; a receipt is requi",
+     "score": 0.6557
+    },
+    {
+     "doc": "09-benefits.md",
+     "snippet": "# Benefits\n\n- Health insurance: ₹5,00,000 family floater covering the employee, spouse and up to 2 children. An optional\n  top-up of ₹5,00,000 and optional parental cover can be bought at the employee",
+     "score": 0.6277
+    },
+    {
+     "doc": "03-travel-policy.md",
+     "snippet": "# Travel Policy\n\n- Flights: economy class for flights shorter than 6 hours. Business class is allowed for flights of 6 hours or\n  longer, only for employees at grade L5 and above.\n- Hotels: up to ₹6,0",
+     "score": 0.6168
+    }
+   ],
+   "tool_calls": [],
+   "retrieved_docs": [
+    "07-remote-work-policy.md",
+    "02-expense-policy.md",
+    "09-benefits.md",
+    "03-travel-policy.md"
+   ],
+   "retrieval_top3": [
+    "07-remote-work-policy.md",
+    "02-expense-policy.md",
+    "09-benefits.md"
+   ],
+   "retrieval_hit_top3": true,
+   "checks": {
+    "facts_present": true,
+    "cited_right_doc": true,
+    "no_unneeded_tool": true,
+    "pass": true
+   },
+   "latency_s": 3.34,
+   "llm_calls": 2,
+   "input_tokens": 2728,
+   "output_tokens": 49,
+   "confirmation_requested": false
+  },
+  {
+   "id": "q16",
+   "class": "kb",
+   "question": "What is the health insurance cover amount?",
+   "answer": "The health insurance cover is a ₹5,00,000 family floater covering the employee, spouse, and up to 2 children. An optional top-up of ₹5,00,000 and optional parental cover can also be purchased at the employee's cost.",
+   "citations": [
+    {
+     "doc": "09-benefits.md",
+     "snippet": "# Benefits\n\n- Health insurance: ₹5,00,000 family floater covering the employee, spouse and up to 2 children. An optional\n  top-up of ₹5,00,000 and optional parental cover can be bought at the employee",
+     "score": 0.6172
+    },
+    {
+     "doc": "03-travel-policy.md",
+     "snippet": "# Travel Policy\n\n- Flights: economy class for flights shorter than 6 hours. Business class is allowed for flights of 6 hours or\n  longer, only for employees at grade L5 and above.\n- Hotels: up to ₹6,0",
+     "score": 0.5832
+    },
+    {
+     "doc": "02-expense-policy.md",
+     "snippet": "# Expense Reimbursement Policy\n\n## Limits\n- Meals while travelling: up to ₹800 per day for domestic travel and ₹2,500 per day for international travel.\n- Local cab or auto: actuals; a receipt is requi",
+     "score": 0.576
+    },
+    {
+     "doc": "01-leave-policy.md",
+     "snippet": "# Leave Policy\n\n## Entitlements (per calendar year)\n- Casual leave (CL): 12 days per year, credited in full on 1 January. Casual leave does not carry forward.\n- Sick leave (SL): 10 days per year. A me",
+     "score": 0.5527
+    }
+   ],
+   "tool_calls": [],
+   "retrieved_docs": [
+    "09-benefits.md",
+    "03-travel-policy.md",
+    "02-expense-policy.md",
+    "01-leave-policy.md"
+   ],
+   "retrieval_top3": [
+    "09-benefits.md",
+    "03-travel-policy.md",
+    "02-expense-policy.md"
+   ],
+   "retrieval_hit_top3": true,
+   "checks": {
+    "facts_present": true,
+    "cited_right_doc": true,
+    "no_unneeded_tool": true,
+    "pass": true
+   },
+   "latency_s": 4.72,
+   "llm_calls": 2,
+   "input_tokens": 2852,
+   "output_tokens": 81,
+   "confirmation_requested": false
+  },
+  {
+   "id": "q17",
+   "class": "kb",
+   "question": "What is the yearly learning budget?",
+   "answer": "The yearly learning budget is ₹25,000 per year for courses, books, and conferences, which must be approved by your manager.",
+   "citations": [
+    {
+     "doc": "09-benefits.md",
+     "snippet": "# Benefits\n\n- Health insurance: ₹5,00,000 family floater covering the employee, spouse and up to 2 children. An optional\n  top-up of ₹5,00,000 and optional parental cover can be bought at the employee",
+     "score": 0.625
+    },
+    {
+     "doc": "03-travel-policy.md",
+     "snippet": "# Travel Policy\n\n- Flights: economy class for flights shorter than 6 hours. Business class is allowed for flights of 6 hours or\n  longer, only for employees at grade L5 and above.\n- Hotels: up to ₹6,0",
+     "score": 0.6191
+    },
+    {
+     "doc": "02-expense-policy.md",
+     "snippet": "# Expense Reimbursement Policy\n\n## Limits\n- Meals while travelling: up to ₹800 per day for domestic travel and ₹2,500 per day for international travel.\n- Local cab or auto: actuals; a receipt is requi",
+     "score": 0.6181
+    },
+    {
+     "doc": "12-glossary.md",
+     "snippet": "# Glossary\n\n- CL — casual leave. SL — sick leave. EL — earned leave.\n- CTC — cost to company, the total annual compensation.\n- L-grades — engineering levels L1 (junior) to L7 (principal). L5 is senior",
+     "score": 0.6141
+    }
+   ],
+   "tool_calls": [],
+   "retrieved_docs": [
+    "09-benefits.md",
+    "03-travel-policy.md",
+    "02-expense-policy.md",
+    "12-glossary.md"
+   ],
+   "retrieval_top3": [
+    "09-benefits.md",
+    "12-glossary.md",
+    "03-travel-policy.md"
+   ],
+   "retrieval_hit_top3": true,
+   "checks": {
+    "facts_present": true,
+    "cited_right_doc": true,
+    "no_unneeded_tool": true,
+    "pass": true
+   },
+   "latency_s": 8.61,
+   "llm_calls": 2,
+   "input_tokens": 2712,
+   "output_tokens": 48,
+   "confirmation_requested": false
+  },
+  {
+   "id": "q18",
+   "class": "kb",
+   "question": "Above what value must gifts from vendors be declared?",
+   "answer": "Gifts from vendors or customers above ₹2,000 in value must be declared to your manager and may have to be returned.",
+   "citations": [
+    {
+     "doc": "10-code-of-conduct.md",
+     "snippet": "# Code of Conduct\n\n- Harassment of any kind is not tolerated. Complaints under POSH go to the Internal Committee (IC) at\n  posh-ic@meridianlabs.example and are acknowledged within 7 days.\n- Gifts from",
+     "score": 0.6703
+    },
+    {
+     "doc": "02-expense-policy.md",
+     "snippet": "# Expense Reimbursement Policy\n\n## Limits\n- Meals while travelling: up to ₹800 per day for domestic travel and ₹2,500 per day for international travel.\n- Local cab or auto: actuals; a receipt is requi",
+     "score": 0.6051
+    },
+    {
+     "doc": "03-travel-policy.md",
+     "snippet": "# Travel Policy\n\n- Flights: economy class for flights shorter than 6 hours. Business class is allowed for flights of 6 hours or\n  longer, only for employees at grade L5 and above.\n- Hotels: up to ₹6,0",
+     "score": 0.598
+    },
+    {
+     "doc": "09-benefits.md",
+     "snippet": "# Benefits\n\n- Health insurance: ₹5,00,000 family floater covering the employee, spouse and up to 2 children. An optional\n  top-up of ₹5,00,000 and optional parental cover can be bought at the employee",
+     "score": 0.5845
+    }
+   ],
+   "tool_calls": [],
+   "retrieved_docs": [
+    "10-code-of-conduct.md",
+    "02-expense-policy.md",
+    "03-travel-policy.md",
+    "09-benefits.md"
+   ],
+   "retrieval_top3": [
+    "10-code-of-conduct.md",
+    "02-expense-policy.md",
+    "03-travel-policy.md"
+   ],
+   "retrieval_hit_top3": true,
+   "checks": {
+    "facts_present": true,
+    "cited_right_doc": true,
+    "no_unneeded_tool": true,
+    "pass": true
+   },
+   "latency_s": 9.88,
+   "llm_calls": 2,
+   "input_tokens": 2715,
+   "output_tokens": 50,
+   "confirmation_requested": false
+  },
+  {
+   "id": "q19",
+   "class": "kb",
+   "question": "Within how many minutes must an S1 incident be acknowledged?",
+   "answer": "An S1 incident must be acknowledged within 15 minutes, and an incident commander must be assigned (Source: `11-incident-process.md`).",
+   "citations": [
+    {
+     "doc": "11-incident-process.md",
+     "snippet": "# Production Incident Process\n\n- Severity levels: S1 (customer-facing outage), S2 (major degradation), S3 (minor issue), S4 (cosmetic).\n- S1 incidents must be acknowledged within 15 minutes and have a",
+     "score": 0.7527
+    },
+    {
+     "doc": "12-glossary.md",
+     "snippet": "# Glossary\n\n- CL — casual leave. SL — sick leave. EL — earned leave.\n- CTC — cost to company, the total annual compensation.\n- L-grades — engineering levels L1 (junior) to L7 (principal). L5 is senior",
+     "score": 0.6288
+    },
+    {
+     "doc": "01-leave-policy.md",
+     "snippet": "# Leave Policy\n\n## Entitlements (per calendar year)\n- Casual leave (CL): 12 days per year, credited in full on 1 January. Casual leave does not carry forward.\n- Sick leave (SL): 10 days per year. A me",
+     "score": 0.6031
+    },
+    {
+     "doc": "05-onboarding.md",
+     "snippet": "# Onboarding\n\n- Day 1: laptop, accounts and a welcome session. An onboarding buddy is assigned for the first 90 days.\n- Every new joiner has a 30/60/90-day plan agreed with the manager in the first we",
+     "score": 0.5932
+    }
+   ],
+   "tool_calls": [],
+   "retrieved_docs": [
+    "11-incident-process.md",
+    "12-glossary.md",
+    "01-leave-policy.md",
+    "05-onboarding.md"
+   ],
+   "retrieval_top3": [
+    "11-incident-process.md",
+    "12-glossary.md",
+    "04-it-security-policy.md"
+   ],
+   "retrieval_hit_top3": true,
+   "checks": {
+    "facts_present": true,
+    "cited_right_doc": true,
+    "no_unneeded_tool": true,
+    "pass": true
+   },
+   "latency_s": 17.73,
+   "llm_calls": 2,
+   "input_tokens": 2676,
+   "output_tokens": 54,
+   "confirmation_requested": false
+  },
+  {
+   "id": "q20",
+   "class": "kb",
+   "question": "By when is a postmortem due after an S1 incident?",
+   "answer": "According to the Production Incident Process, every S1 and S2 incident requires a blameless postmortem within 5 working days.",
+   "citations": [
+    {
+     "doc": "11-incident-process.md",
+     "snippet": "# Production Incident Process\n\n- Severity levels: S1 (customer-facing outage), S2 (major degradation), S3 (minor issue), S4 (cosmetic).\n- S1 incidents must be acknowledged within 15 minutes and have a",
+     "score": 0.7321
+    },
+    {
+     "doc": "12-glossary.md",
+     "snippet": "# Glossary\n\n- CL — casual leave. SL — sick leave. EL — earned leave.\n- CTC — cost to company, the total annual compensation.\n- L-grades — engineering levels L1 (junior) to L7 (principal). L5 is senior",
+     "score": 0.6212
+    },
+    {
+     "doc": "10-code-of-conduct.md",
+     "snippet": "# Code of Conduct\n\n- Harassment of any kind is not tolerated. Complaints under POSH go to the Internal Committee (IC) at\n  posh-ic@meridianlabs.example and are acknowledged within 7 days.\n- Gifts from",
+     "score": 0.6013
+    },
+    {
+     "doc": "01-leave-policy.md",
+     "snippet": "# Leave Policy\n\n## Entitlements (per calendar year)\n- Casual leave (CL): 12 days per year, credited in full on 1 January. Casual leave does not carry forward.\n- Sick leave (SL): 10 days per year. A me",
+     "score": 0.6012
+    }
+   ],
+   "tool_calls": [],
+   "retrieved_docs": [
+    "11-incident-process.md",
+    "12-glossary.md",
+    "10-code-of-conduct.md",
+    "01-leave-policy.md"
+   ],
+   "retrieval_top3": [
+    "11-incident-process.md",
+    "12-glossary.md",
+    "01-leave-policy.md"
+   ],
+   "retrieval_hit_top3": true,
+   "checks": {
+    "facts_present": true,
+    "cited_right_doc": true,
+    "no_unneeded_tool": true,
+    "pass": true
+   },
+   "latency_s": 5.03,
+   "llm_calls": 2,
+   "input_tokens": 2677,
+   "output_tokens": 49,
+   "confirmation_requested": false
+  },
+  {
+   "id": "q21",
+   "class": "kb",
+   "question": "What does grade L5 mean?",
+   "answer": "L-grades refer to engineering levels ranging from L1 (junior) to L7 (principal), with L5 designated as senior staff.",
+   "citations": [
+    {
+     "doc": "12-glossary.md",
+     "snippet": "# Glossary\n\n- CL — casual leave. SL — sick leave. EL — earned leave.\n- CTC — cost to company, the total annual compensation.\n- L-grades — engineering levels L1 (junior) to L7 (principal). L5 is senior",
+     "score": 0.6481
+    },
+    {
+     "doc": "03-travel-policy.md",
+     "snippet": "# Travel Policy\n\n- Flights: economy class for flights shorter than 6 hours. Business class is allowed for flights of 6 hours or\n  longer, only for employees at grade L5 and above.\n- Hotels: up to ₹6,0",
+     "score": 0.6319
+    },
+    {
+     "doc": "01-leave-policy.md",
+     "snippet": "# Leave Policy\n\n## Entitlements (per calendar year)\n- Casual leave (CL): 12 days per year, credited in full on 1 January. Casual leave does not carry forward.\n- Sick leave (SL): 10 days per year. A me",
+     "score": 0.624
+    },
+    {
+     "doc": "11-incident-process.md",
+     "snippet": "# Production Incident Process\n\n- Severity levels: S1 (customer-facing outage), S2 (major degradation), S3 (minor issue), S4 (cosmetic).\n- S1 incidents must be acknowledged within 15 minutes and have a",
+     "score": 0.607
+    }
+   ],
+   "tool_calls": [],
+   "retrieved_docs": [
+    "12-glossary.md",
+    "03-travel-policy.md",
+    "01-leave-policy.md",
+    "11-incident-process.md"
+   ],
+   "retrieval_top3": [
+    "12-glossary.md",
+    "03-travel-policy.md",
+    "01-leave-policy.md"
+   ],
+   "retrieval_hit_top3": true,
+   "checks": {
+    "facts_present": true,
+    "cited_right_doc": true,
+    "no_unneeded_tool": true,
+    "pass": true
+   },
+   "latency_s": 9.89,
+   "llm_calls": 2,
+   "input_tokens": 2713,
+   "output_tokens": 47,
+   "confirmation_requested": false
+  },
+  {
+   "id": "q22",
+   "class": "kb",
+   "question": "After how many years of service is gratuity payable?",
+   "answer": "Gratuity is payable after 5 years of continuous service.",
+   "citations": [
+    {
+     "doc": "09-benefits.md",
+     "snippet": "# Benefits\n\n- Health insurance: ₹5,00,000 family floater covering the employee, spouse and up to 2 children. An optional\n  top-up of ₹5,00,000 and optional parental cover can be bought at the employee",
+     "score": 0.6043
+    },
+    {
+     "doc": "12-glossary.md",
+     "snippet": "# Glossary\n\n- CL — casual leave. SL — sick leave. EL — earned leave.\n- CTC — cost to company, the total annual compensation.\n- L-grades — engineering levels L1 (junior) to L7 (principal). L5 is senior",
+     "score": 0.5884
+    },
+    {
+     "doc": "01-leave-policy.md",
+     "snippet": "# Leave Policy\n\n## Entitlements (per calendar year)\n- Casual leave (CL): 12 days per year, credited in full on 1 January. Casual leave does not carry forward.\n- Sick leave (SL): 10 days per year. A me",
+     "score": 0.5859
+    },
+    {
+     "doc": "03-travel-policy.md",
+     "snippet": "# Travel Policy\n\n- Flights: economy class for flights shorter than 6 hours. Business class is allowed for flights of 6 hours or\n  longer, only for employees at grade L5 and above.\n- Hotels: up to ₹6,0",
+     "score": 0.5743
+    }
+   ],
+   "tool_calls": [],
+   "retrieved_docs": [
+    "09-benefits.md",
+    "12-glossary.md",
+    "01-leave-policy.md",
+    "03-travel-policy.md"
+   ],
+   "retrieval_top3": [
+    "09-benefits.md",
+    "12-glossary.md",
+    "01-leave-policy.md"
+   ],
+   "retrieval_hit_top3": true,
+   "checks": {
+    "facts_present": true,
+    "cited_right_doc": true,
+    "no_unneeded_tool": true,
+    "pass": true
+   },
+   "latency_s": 12.32,
+   "llm_calls": 2,
+   "input_tokens": 2773,
+   "output_tokens": 34,
+   "confirmation_requested": false
+  },
+  {
+   "id": "q23",
+   "class": "tool",
+   "question": "What is the leave balance of employee E1001?",
+   "answer": "Employee E1001 (Asha Rao) has the following leave balance:\n- Casual Leave (CL): 7 days\n- Sick Leave (SL): 9 days\n- Earned Leave (EL): 21.5 days",
+   "citations": [],
+   "tool_calls": [
+    {
+     "api": "/leave-balance/{employee_id}",
+     "method": "GET",
+     "params": {
+      "employee_id": "E1001"
+     },
+     "result": "{\"ok\": true, \"employee_id\": \"E1001\", \"name\": \"Asha Rao\", \"grade\": \"L3\", \"location\": \"Bengaluru\", \"leave_balance\": {\"CL\": 7, \"SL\": 9, \"EL\": 21.5}}"
+    }
+   ],
+   "retrieved_docs": [],
+   "retrieval_top3": [],
+   "retrieval_hit_top3": null,
+   "checks": {
+    "facts_present": true,
+    "right_tool_called": true,
+    "tool_args_correct": true,
+    "pass": true
+   },
+   "latency_s": 15.67,
+   "llm_calls": 2,
+   "input_tokens": 1983,
+   "output_tokens": 74,
+   "confirmation_requested": false
+  },
+  {
+   "id": "q24",
+   "class": "tool",
+   "question": "How much earned leave does E1003 have left?",
+   "answer": "Employee E1003 (Meera Iyer) has 6 days of Earned Leave (EL) left.",
+   "citations": [],
+   "tool_calls": [
+    {
+     "api": "/leave-balance/{employee_id}",
+     "method": "GET",
+     "params": {
+      "employee_id": "E1003"
+     },
+     "result": "{\"ok\": true, \"employee_id\": \"E1003\", \"name\": \"Meera Iyer\", \"grade\": \"L2\", \"location\": \"Delhi\", \"leave_balance\": {\"CL\": 12, \"SL\": 4, \"EL\": 6}}"
+    }
+   ],
+   "retrieved_docs": [],
+   "retrieval_top3": [],
+   "retrieval_hit_top3": null,
+   "checks": {
+    "facts_present": true,
+    "right_tool_called": true,
+    "tool_args_correct": true,
+    "pass": true
+   },
+   "latency_s": 2.76,
+   "llm_calls": 2,
+   "input_tokens": 1980,
+   "output_tokens": 46,
+   "confirmation_requested": false
+  },
+  {
+   "id": "q25",
+   "class": "tool",
+   "question": "I spent ₹1,200 on meals in one day of domestic travel with a receipt. How much will be reimbursed?",
+   "answer": "Meals for domestic travel are capped at ₹800 per day. Out of your ₹1,200 claim, ₹800 will be reimbursed and the remaining ₹400 excess is borne by the employee.",
+   "citations": [
+    {
+     "doc": "02-expense-policy.md",
+     "snippet": "# Expense Reimbursement Policy\n\n## Limits\n- Meals while travelling: up to ₹800 per day for domestic travel and ₹2,500 per day for international travel.\n- Local cab or auto: actuals; a receipt is requi",
+     "score": 0.6754
+    },
+    {
+     "doc": "03-travel-policy.md",
+     "snippet": "# Travel Policy\n\n- Flights: economy class for flights shorter than 6 hours. Business class is allowed for flights of 6 hours or\n  longer, only for employees at grade L5 and above.\n- Hotels: up to ₹6,0",
+     "score": 0.6472
+    },
+    {
+     "doc": "00-about-this-handbook.md",
+     "snippet": "# Meridian Labs Employee Handbook — About\n\nMeridian Labs is a fictional software company used for this demo. This handbook is the single source of truth for\npeople policies. Where a policy and a manag",
+     "score": 0.554
+    },
+    {
+     "doc": "12-glossary.md",
+     "snippet": "# Glossary\n\n- CL — casual leave. SL — sick leave. EL — earned leave.\n- CTC — cost to company, the total annual compensation.\n- L-grades — engineering levels L1 (junior) to L7 (principal). L5 is senior",
+     "score": 0.5474
+    }
+   ],
+   "tool_calls": [
+    {
+     "api": "/reimbursement/calculate",
+     "method": "POST",
+     "params": {
+      "days": 1,
+      "has_receipt": true,
+      "category": "meals_domestic",
+      "amount_inr": 1200
+     },
+     "result": "{\"ok\": true, \"category\": \"meals_domestic\", \"claimed_inr\": 1200.0, \"approved_inr\": 800, \"excess_inr\": 400.0, \"reason\": \"capped at ₹800 (day)\"}"
+    }
+   ],
+   "retrieved_docs": [
+    "02-expense-policy.md",
+    "03-travel-policy.md",
+    "00-about-this-handbook.md",
+    "12-glossary.md"
+   ],
+   "retrieval_top3": [],
+   "retrieval_hit_top3": null,
+   "checks": {
+    "facts_present": true,
+    "right_tool_called": true,
+    "tool_args_correct": true,
+    "pass": true
+   },
+   "latency_s": 13.81,
+   "llm_calls": 2,
+   "input_tokens": 2765,
+   "output_tokens": 108,
+   "confirmation_requested": false
+  },
+  {
+   "id": "q26",
+   "class": "tool",
+   "question": "My home internet bill is ₹900 this month but I lost the receipt. How much gets reimbursed?",
+   "answer": "Receipts are mandatory for any expense above ₹500. Since your bill is ₹900 and you lost the receipt, the reimbursement amount is ₹0.",
+   "citations": [
+    {
+     "doc": "02-expense-policy.md",
+     "snippet": "# Expense Reimbursement Policy\n\n## Limits\n- Meals while travelling: up to ₹800 per day for domestic travel and ₹2,500 per day for international travel.\n- Local cab or auto: actuals; a receipt is requi",
+     "score": 0.6969
+    },
+    {
+     "doc": "03-travel-policy.md",
+     "snippet": "# Travel Policy\n\n- Flights: economy class for flights shorter than 6 hours. Business class is allowed for flights of 6 hours or\n  longer, only for employees at grade L5 and above.\n- Hotels: up to ₹6,0",
+     "score": 0.5973
+    },
+    {
+     "doc": "06-device-policy.md",
+     "snippet": "# Device Policy\n\n- Company laptops are refreshed every 3 years.\n- A lost or stolen device must be reported to IT within 24 hours so it can be remotely wiped.\n- If a device is lost through negligence, ",
+     "score": 0.5882
+    },
+    {
+     "doc": "09-benefits.md",
+     "snippet": "# Benefits\n\n- Health insurance: ₹5,00,000 family floater covering the employee, spouse and up to 2 children. An optional\n  top-up of ₹5,00,000 and optional parental cover can be bought at the employee",
+     "score": 0.5767
+    }
+   ],
+   "tool_calls": [
+    {
+     "api": "/reimbursement/calculate",
+     "method": "POST",
+     "params": {
+      "has_receipt": false,
+      "category": "internet",
+      "amount_inr": 900
+     },
+     "result": "{\"ok\": true, \"category\": \"internet\", \"claimed_inr\": 900.0, \"approved_inr\": 0, \"reason\": \"receipt required above ₹500\"}"
+    }
+   ],
+   "retrieved_docs": [
+    "02-expense-policy.md",
+    "03-travel-policy.md",
+    "06-device-policy.md",
+    "09-benefits.md"
+   ],
+   "retrieval_top3": [],
+   "retrieval_hit_top3": null,
+   "checks": {
+    "facts_present": true,
+    "right_tool_called": true,
+    "tool_args_correct": true,
+    "pass": true
+   },
+   "latency_s": 13.57,
+   "llm_calls": 2,
+   "input_tokens": 2791,
+   "output_tokens": 85,
+   "confirmation_requested": false
+  },
+  {
+   "id": "q27",
+   "class": "tool",
+   "question": "Which holidays does the Mumbai office have in 2026?",
+   "answer": "The Mumbai office has 12 holidays in 2026:\n\n* **Jan 01:** New Year's Day\n* **Jan 14:** Makar Sankranti / Pongal\n* **Jan 26:** Republic Day\n* **Mar 04:** Holi\n* **Apr 03:** Good Friday\n* **May 01:** May Day\n* **Aug 15:** Independence Day\n* **Sep 14:** Ganesh Chaturthi\n* **Oct 02:** Gandhi Jayanti\n* **Oct 20:** Dussehra\n* **Nov 08:** Diwali\n* **Dec 25:** Christmas",
+   "citations": [],
+   "tool_calls": [
+    {
+     "api": "/holidays",
+     "method": "GET",
+     "params": {
+      "year": 2026,
+      "region": "Mumbai"
+     },
+     "result": "{\"ok\": true, \"year\": 2026, \"region\": \"Mumbai\", \"count\": 12, \"holidays\": [{\"date\": \"2026-01-01\", \"name\": \"New Year's Day\"}, {\"date\": \"2026-01-14\", \"name\": \"Makar Sankranti / Pongal\"}, {\"date\": \"2026-01-26\", \"name\": \"Republic Day\"}, {\"date\": \"2026-03-04\", \"name\": \"Holi\"}, {\"date\": \"2026-04-03\", \"name\": \"Good Friday\"}, {\"date\": \"2026-05-01\", \"name\": \"May Day\"}, {\"date\": \"2026-08-15\", \"name\": \"Independence Day\"}, {\"date\": \"2026-09-14\", \"name\": \"Ganesh Chaturthi\"}, {\"date\": \"2026-10-02\", \"name\": \"Gan"
+    }
+   ],
+   "retrieved_docs": [],
+   "retrieval_top3": [],
+   "retrieval_hit_top3": null,
+   "checks": {
+    "facts_present": true,
+    "right_tool_called": true,
+    "tool_args_correct": true,
+    "pass": true
+   },
+   "latency_s": 6.81,
+   "llm_calls": 2,
+   "input_tokens": 2231,
+   "output_tokens": 166,
+   "confirmation_requested": false
+  },
+  {
+   "id": "q28",
+   "class": "tool",
+   "question": "Is 2026-11-08 a company holiday?",
+   "answer": "Yes, November 8, 2026 is a company holiday for Diwali.",
+   "citations": [],
+   "tool_calls": [
+    {
+     "api": "/holidays",
+     "method": "GET",
+     "params": {
+      "year": 2026,
+      "region": "all"
+     },
+     "result": "{\"ok\": true, \"year\": 2026, \"region\": \"all\", \"count\": 11, \"holidays\": [{\"date\": \"2026-01-01\", \"name\": \"New Year's Day\"}, {\"date\": \"2026-01-14\", \"name\": \"Makar Sankranti / Pongal\"}, {\"date\": \"2026-01-26\", \"name\": \"Republic Day\"}, {\"date\": \"2026-03-04\", \"name\": \"Holi\"}, {\"date\": \"2026-04-03\", \"name\": \"Good Friday\"}, {\"date\": \"2026-05-01\", \"name\": \"May Day\"}, {\"date\": \"2026-08-15\", \"name\": \"Independence Day\"}, {\"date\": \"2026-10-02\", \"name\": \"Gandhi Jayanti\"}, {\"date\": \"2026-10-20\", \"name\": \"Dussehra"
+    }
+   ],
+   "retrieved_docs": [],
+   "retrieval_top3": [],
+   "retrieval_hit_top3": null,
+   "checks": {
+    "facts_present": true,
+    "right_tool_called": true,
+    "pass": true
+   },
+   "latency_s": 12.05,
+   "llm_calls": 2,
+   "input_tokens": 2211,
+   "output_tokens": 41,
+   "confirmation_requested": false
+  },
+  {
+   "id": "q29",
+   "class": "tool",
+   "question": "Please file a P2 helpdesk ticket for E1002: VPN cannot connect from home.",
+   "answer": "I have successfully filed your helpdesk ticket. \n\n**Ticket ID:** HD-024918  \n**Priority:** P2  \n**Requester:** E1002  \n**Summary:** VPN cannot connect from home",
+   "citations": [],
+   "tool_calls": [
+    {
+     "api": "/helpdesk/ticket",
+     "method": "POST",
+     "params": {
+      "priority": "P2",
+      "requester_id": "E1002",
+      "summary": "VPN cannot connect from home"
+     },
+     "result": "{\"ok\": true, \"ticket_id\": \"HD-024918\", \"summary\": \"VPN cannot connect from home\", \"priority\": \"P2\", \"requester_id\": \"E1002\", \"status\": \"open\"}"
+    }
+   ],
+   "retrieved_docs": [],
+   "retrieval_top3": [],
+   "retrieval_hit_top3": null,
+   "checks": {
+    "facts_present": true,
+    "right_tool_called": true,
+    "tool_args_correct": true,
+    "confirmation_requested": true,
+    "pass": true
+   },
+   "latency_s": 3.79,
+   "llm_calls": 2,
+   "input_tokens": 2017,
+   "output_tokens": 92,
+   "confirmation_requested": true
+  },
+  {
+   "id": "q30",
+   "class": "tool",
+   "question": "What grade and location is employee E1004?",
+   "answer": "Employee E1004 (Karan Shah) is grade **L6** and located in **Pune**.",
+   "citations": [],
+   "tool_calls": [
+    {
+     "api": "/leave-balance/{employee_id}",
+     "method": "GET",
+     "params": {
+      "employee_id": "E1004"
+     },
+     "result": "{\"ok\": true, \"employee_id\": \"E1004\", \"name\": \"Karan Shah\", \"grade\": \"L6\", \"location\": \"Pune\", \"leave_balance\": {\"CL\": 0, \"SL\": 10, \"EL\": 12}}"
+    }
+   ],
+   "retrieved_docs": [],
+   "retrieval_top3": [],
+   "retrieval_hit_top3": null,
+   "checks": {
+    "facts_present": true,
+    "right_tool_called": true,
+    "tool_args_correct": true,
+    "pass": true
+   },
+   "latency_s": 10.86,
+   "llm_calls": 2,
+   "input_tokens": 1979,
+   "output_tokens": 45,
+   "confirmation_requested": false
+  },
+  {
+   "id": "q31",
+   "class": "both",
+   "question": "Employee E1002 wants to take 12 consecutive working days of earned leave. Does he have the balance, and whose approval is needed?",
+   "answer": "Yes, employee E1002 has an earned leave balance of 30 days, which is sufficient for 12 consecutive working days. Because the leave request is for more than 10 consecutive working days, approval is needed from the skip-level manager.",
+   "citations": [
+    {
+     "doc": "01-leave-policy.md",
+     "snippet": "# Leave Policy\n\n## Entitlements (per calendar year)\n- Casual leave (CL): 12 days per year, credited in full on 1 January. Casual leave does not carry forward.\n- Sick leave (SL): 10 days per year. A me",
+     "score": 0.6808
+    },
+    {
+     "doc": "03-travel-policy.md",
+     "snippet": "# Travel Policy\n\n- Flights: economy class for flights shorter than 6 hours. Business class is allowed for flights of 6 hours or\n  longer, only for employees at grade L5 and above.\n- Hotels: up to ₹6,0",
+     "score": 0.611
+    },
+    {
+     "doc": "05-onboarding.md",
+     "snippet": "# Onboarding\n\n- Day 1: laptop, accounts and a welcome session. An onboarding buddy is assigned for the first 90 days.\n- Every new joiner has a 30/60/90-day plan agreed with the manager in the first we",
+     "score": 0.6038
+    },
+    {
+     "doc": "08-holidays.md",
+     "snippet": "# Holiday Calendar 2026\n\nMeridian Labs observes 12 fixed holidays per year plus 2 optional holidays that each employee chooses from the\noptional list. Fixed holidays for 2026 (all locations unless not",
+     "score": 0.6016
+    }
+   ],
+   "tool_calls": [
+    {
+     "api": "/leave-balance/{employee_id}",
+     "method": "GET",
+     "params": {
+      "employee_id": "E1002"
+     },
+     "result": "{\"ok\": true, \"employee_id\": \"E1002\", \"name\": \"Ravi Menon\", \"grade\": \"L5\", \"location\": \"Mumbai\", \"leave_balance\": {\"CL\": 2, \"SL\": 10, \"EL\": 30}}"
+    }
+   ],
+   "retrieved_docs": [
+    "01-leave-policy.md",
+    "03-travel-policy.md",
+    "05-onboarding.md",
+    "08-holidays.md"
+   ],
+   "retrieval_top3": [
+    "01-leave-policy.md",
+    "03-travel-policy.md",
+    "12-glossary.md"
+   ],
+   "retrieval_hit_top3": true,
+   "checks": {
+    "facts_present": true,
+    "cited_right_doc": true,
+    "right_tool_called": true,
+    "tool_args_correct": true,
+    "pass": true
+   },
+   "latency_s": 7.39,
+   "llm_calls": 2,
+   "input_tokens": 3036,
+   "output_tokens": 98,
+   "confirmation_requested": false
+  },
+  {
+   "id": "q32",
+   "class": "both",
+   "question": "E1005 is on probation and wants earned leave. What is her EL balance and is she allowed to take it?",
+   "answer": "Nisha Verma (E1005) has an Earned Leave (EL) balance of 0 days. Per the leave policy, employees on probation can take casual leave and sick leave but cannot take earned leave until probation ends.",
+   "citations": [
+    {
+     "doc": "01-leave-policy.md",
+     "snippet": "# Leave Policy\n\n## Entitlements (per calendar year)\n- Casual leave (CL): 12 days per year, credited in full on 1 January. Casual leave does not carry forward.\n- Sick leave (SL): 10 days per year. A me",
+     "score": 0.7017
+    },
+    {
+     "doc": "05-onboarding.md",
+     "snippet": "# Onboarding\n\n- Day 1: laptop, accounts and a welcome session. An onboarding buddy is assigned for the first 90 days.\n- Every new joiner has a 30/60/90-day plan agreed with the manager in the first we",
+     "score": 0.6391
+    },
+    {
+     "doc": "12-glossary.md",
+     "snippet": "# Glossary\n\n- CL — casual leave. SL — sick leave. EL — earned leave.\n- CTC — cost to company, the total annual compensation.\n- L-grades — engineering levels L1 (junior) to L7 (principal). L5 is senior",
+     "score": 0.6339
+    },
+    {
+     "doc": "03-travel-policy.md",
+     "snippet": "# Travel Policy\n\n- Flights: economy class for flights shorter than 6 hours. Business class is allowed for flights of 6 hours or\n  longer, only for employees at grade L5 and above.\n- Hotels: up to ₹6,0",
+     "score": 0.6234
+    }
+   ],
+   "tool_calls": [
+    {
+     "api": "/leave-balance/{employee_id}",
+     "method": "GET",
+     "params": {
+      "employee_id": "E1005"
+     },
+     "result": "{\"ok\": true, \"employee_id\": \"E1005\", \"name\": \"Nisha Verma\", \"grade\": \"L1\", \"location\": \"Chennai\", \"leave_balance\": {\"CL\": 10, \"SL\": 10, \"EL\": 0}}"
+    }
+   ],
+   "retrieved_docs": [
+    "01-leave-policy.md",
+    "05-onboarding.md",
+    "12-glossary.md",
+    "03-travel-policy.md"
+   ],
+   "retrieval_top3": [
+    "01-leave-policy.md",
+    "05-onboarding.md",
+    "12-glossary.md"
+   ],
+   "retrieval_hit_top3": true,
+   "checks": {
+    "facts_present": true,
+    "cited_right_doc": true,
+    "right_tool_called": true,
+    "tool_args_correct": true,
+    "pass": true
+   },
+   "latency_s": 5.8,
+   "llm_calls": 2,
+   "input_tokens": 2815,
+   "output_tokens": 92,
+   "confirmation_requested": false
+  },
+  {
+   "id": "q33",
+   "class": "both",
+   "question": "I claimed ₹3,000 for one day of international meals with receipts. What's the limit and how much do I get?",
+   "answer": "The limit for international travel meals is ₹2,500 per day. For your claim of ₹3,000 with a receipt, you will be reimbursed ₹2,500, and the excess of ₹500 will be borne by you.",
+   "citations": [
+    {
+     "doc": "02-expense-policy.md",
+     "snippet": "# Expense Reimbursement Policy\n\n## Limits\n- Meals while travelling: up to ₹800 per day for domestic travel and ₹2,500 per day for international travel.\n- Local cab or auto: actuals; a receipt is requi",
+     "score": 0.6566
+    },
+    {
+     "doc": "03-travel-policy.md",
+     "snippet": "# Travel Policy\n\n- Flights: economy class for flights shorter than 6 hours. Business class is allowed for flights of 6 hours or\n  longer, only for employees at grade L5 and above.\n- Hotels: up to ₹6,0",
+     "score": 0.6469
+    },
+    {
+     "doc": "12-glossary.md",
+     "snippet": "# Glossary\n\n- CL — casual leave. SL — sick leave. EL — earned leave.\n- CTC — cost to company, the total annual compensation.\n- L-grades — engineering levels L1 (junior) to L7 (principal). L5 is senior",
+     "score": 0.5864
+    },
+    {
+     "doc": "01-leave-policy.md",
+     "snippet": "# Leave Policy\n\n## Entitlements (per calendar year)\n- Casual leave (CL): 12 days per year, credited in full on 1 January. Casual leave does not carry forward.\n- Sick leave (SL): 10 days per year. A me",
+     "score": 0.5684
+    }
+   ],
+   "tool_calls": [
+    {
+     "api": "/reimbursement/calculate",
+     "method": "POST",
+     "params": {
+      "category": "meals_international",
+      "has_receipt": true,
+      "amount_inr": 3000,
+      "days": 1
+     },
+     "result": "{\"ok\": true, \"category\": \"meals_international\", \"claimed_inr\": 3000.0, \"approved_inr\": 2500, \"excess_inr\": 500.0, \"reason\": \"capped at ₹2,500 (day)\"}"
+    }
+   ],
+   "retrieved_docs": [
+    "02-expense-policy.md",
+    "03-travel-policy.md",
+    "12-glossary.md",
+    "01-leave-policy.md"
+   ],
+   "retrieval_top3": [
+    "02-expense-policy.md",
+    "03-travel-policy.md",
+    "09-benefits.md"
+   ],
+   "retrieval_hit_top3": true,
+   "checks": {
+    "facts_present": true,
+    "cited_right_doc": true,
+    "right_tool_called": true,
+    "tool_args_correct": true,
+    "pass": true
+   },
+   "latency_s": 18.67,
+   "llm_calls": 2,
+   "input_tokens": 2930,
+   "output_tokens": 113,
+   "confirmation_requested": false
+  },
+  {
+   "id": "q34",
+   "class": "both",
+   "question": "Employee E1002 (grade L5) has a 7-hour flight. Can he fly business class, and what is his casual leave balance?",
+   "answer": "Yes, employee E1002 can fly business class because flights of 6 hours or longer are permitted in business class for employees at grade L5 and above. \n\nEmployee E1002 currently has 2 casual leave (CL) days remaining in their balance.",
+   "citations": [
+    {
+     "doc": "03-travel-policy.md",
+     "snippet": "# Travel Policy\n\n- Flights: economy class for flights shorter than 6 hours. Business class is allowed for flights of 6 hours or\n  longer, only for employees at grade L5 and above.\n- Hotels: up to ₹6,0",
+     "score": 0.7013
+    },
+    {
+     "doc": "01-leave-policy.md",
+     "snippet": "# Leave Policy\n\n## Entitlements (per calendar year)\n- Casual leave (CL): 12 days per year, credited in full on 1 January. Casual leave does not carry forward.\n- Sick leave (SL): 10 days per year. A me",
+     "score": 0.6125
+    },
+    {
+     "doc": "02-expense-policy.md",
+     "snippet": "# Expense Reimbursement Policy\n\n## Limits\n- Meals while travelling: up to ₹800 per day for domestic travel and ₹2,500 per day for international travel.\n- Local cab or auto: actuals; a receipt is requi",
+     "score": 0.6096
+    },
+    {
+     "doc": "07-remote-work-policy.md",
+     "snippet": "# Remote and Hybrid Work Policy\n\n- Hybrid schedule: 3 days a week in the office, Tuesday to Thursday. Monday and Friday are remote by default.\n- Core collaboration hours are 11:00 to 16:00 IST; everyo",
+     "score": 0.5965
+    }
+   ],
+   "tool_calls": [
+    {
+     "api": "/leave-balance/{employee_id}",
+     "method": "GET",
+     "params": {
+      "employee_id": "E1002"
+     },
+     "result": "{\"ok\": true, \"employee_id\": \"E1002\", \"name\": \"Ravi Menon\", \"grade\": \"L5\", \"location\": \"Mumbai\", \"leave_balance\": {\"CL\": 2, \"SL\": 10, \"EL\": 30}}"
+    }
+   ],
+   "retrieved_docs": [
+    "03-travel-policy.md",
+    "01-leave-policy.md",
+    "02-expense-policy.md",
+    "07-remote-work-policy.md"
+   ],
+   "retrieval_top3": [
+    "01-leave-policy.md",
+    "03-travel-policy.md",
+    "12-glossary.md"
+   ],
+   "retrieval_hit_top3": true,
+   "checks": {
+    "facts_present": true,
+    "cited_right_doc": true,
+    "right_tool_called": true,
+    "tool_args_correct": true,
+    "pass": true
+   },
+   "latency_s": 11.18,
+   "llm_calls": 2,
+   "input_tokens": 2925,
+   "output_tokens": 101,
+   "confirmation_requested": false
+  },
+  {
+   "id": "q35",
+   "class": "both",
+   "question": "How many fixed holidays does the company give, and list the Bengaluru holidays in 2026.",
+   "answer": "Meridian Labs observes 12 fixed holidays per year, plus 2 optional holidays chosen from the optional list. \n\nThe 2026 fixed holidays for Bengaluru are:\n- **2026-01-01**: New Year's Day\n- **2026-01-14**: Makar Sankranti / Pongal\n- **2026-01-26**: Republic Day\n- **2026-03-04**: Holi\n- **2026-04-03**: Good Friday\n- **2026-05-01**: May Day\n- **2026-08-15**: Independence Day\n- **2026-09-14**: Onam\n- **2026-10-02**: Gandhi Jayanti\n- **2026-10-20**: Dussehra\n- **2026-11-08**: Diwali\n- **2026-12-25**: Christmas",
+   "citations": [
+    {
+     "doc": "08-holidays.md",
+     "snippet": "# Holiday Calendar 2026\n\nMeridian Labs observes 12 fixed holidays per year plus 2 optional holidays that each employee chooses from the\noptional list. Fixed holidays for 2026 (all locations unless not",
+     "score": 0.6957
+    },
+    {
+     "doc": "01-leave-policy.md",
+     "snippet": "# Leave Policy\n\n## Entitlements (per calendar year)\n- Casual leave (CL): 12 days per year, credited in full on 1 January. Casual leave does not carry forward.\n- Sick leave (SL): 10 days per year. A me",
+     "score": 0.6289
+    },
+    {
+     "doc": "03-travel-policy.md",
+     "snippet": "# Travel Policy\n\n- Flights: economy class for flights shorter than 6 hours. Business class is allowed for flights of 6 hours or\n  longer, only for employees at grade L5 and above.\n- Hotels: up to ₹6,0",
+     "score": 0.5975
+    },
+    {
+     "doc": "12-glossary.md",
+     "snippet": "# Glossary\n\n- CL — casual leave. SL — sick leave. EL — earned leave.\n- CTC — cost to company, the total annual compensation.\n- L-grades — engineering levels L1 (junior) to L7 (principal). L5 is senior",
+     "score": 0.5851
+    }
+   ],
+   "tool_calls": [
+    {
+     "api": "/holidays",
+     "method": "GET",
+     "params": {
+      "region": "Bengaluru",
+      "year": 2026
+     },
+     "result": "{\"ok\": true, \"year\": 2026, \"region\": \"Bengaluru\", \"count\": 12, \"holidays\": [{\"date\": \"2026-01-01\", \"name\": \"New Year's Day\"}, {\"date\": \"2026-01-14\", \"name\": \"Makar Sankranti / Pongal\"}, {\"date\": \"2026-01-26\", \"name\": \"Republic Day\"}, {\"date\": \"2026-03-04\", \"name\": \"Holi\"}, {\"date\": \"2026-04-03\", \"name\": \"Good Friday\"}, {\"date\": \"2026-05-01\", \"name\": \"May Day\"}, {\"date\": \"2026-08-15\", \"name\": \"Independence Day\"}, {\"date\": \"2026-09-14\", \"name\": \"Onam\"}, {\"date\": \"2026-10-02\", \"name\": \"Gandhi Jayan"
+    }
+   ],
+   "retrieved_docs": [
+    "08-holidays.md",
+    "01-leave-policy.md",
+    "03-travel-policy.md",
+    "12-glossary.md"
+   ],
+   "retrieval_top3": [
+    "08-holidays.md",
+    "03-travel-policy.md",
+    "09-benefits.md"
+   ],
+   "retrieval_hit_top3": true,
+   "checks": {
+    "facts_present": true,
+    "cited_right_doc": true,
+    "right_tool_called": true,
+    "pass": true
+   },
+   "latency_s": 12.0,
+   "llm_calls": 2,
+   "input_tokens": 3267,
+   "output_tokens": 279,
+   "confirmation_requested": false
+  },
+  {
+   "id": "q36",
+   "class": "both",
+   "question": "What is the mobile bill limit, and how much of a ₹900 mobile bill with receipt is reimbursed?",
+   "answer": "The mobile phone bill limit is up to ₹750 per month. For a ₹900 mobile bill with a receipt, an amount of ₹750 is reimbursed, and the excess of ₹150 is borne by the employee.",
+   "citations": [
+    {
+     "doc": "02-expense-policy.md",
+     "snippet": "# Expense Reimbursement Policy\n\n## Limits\n- Meals while travelling: up to ₹800 per day for domestic travel and ₹2,500 per day for international travel.\n- Local cab or auto: actuals; a receipt is requi",
+     "score": 0.6182
+    },
+    {
+     "doc": "06-device-policy.md",
+     "snippet": "# Device Policy\n\n- Company laptops are refreshed every 3 years.\n- A lost or stolen device must be reported to IT within 24 hours so it can be remotely wiped.\n- If a device is lost through negligence, ",
+     "score": 0.5652
+    },
+    {
+     "doc": "03-travel-policy.md",
+     "snippet": "# Travel Policy\n\n- Flights: economy class for flights shorter than 6 hours. Business class is allowed for flights of 6 hours or\n  longer, only for employees at grade L5 and above.\n- Hotels: up to ₹6,0",
+     "score": 0.5645
+    },
+    {
+     "doc": "10-code-of-conduct.md",
+     "snippet": "# Code of Conduct\n\n- Harassment of any kind is not tolerated. Complaints under POSH go to the Internal Committee (IC) at\n  posh-ic@meridianlabs.example and are acknowledged within 7 days.\n- Gifts from",
+     "score": 0.5505
+    }
+   ],
+   "tool_calls": [
+    {
+     "api": "/reimbursement/calculate",
+     "method": "POST",
+     "params": {
+      "amount_inr": 900,
+      "has_receipt": true,
+      "category": "mobile"
+     },
+     "result": "{\"ok\": true, \"category\": \"mobile\", \"claimed_inr\": 900.0, \"approved_inr\": 750, \"excess_inr\": 150.0, \"reason\": \"capped at ₹750 (month)\"}"
+    }
+   ],
+   "retrieved_docs": [
+    "02-expense-policy.md",
+    "06-device-policy.md",
+    "03-travel-policy.md",
+    "10-code-of-conduct.md"
+   ],
+   "retrieval_top3": [
+    "02-expense-policy.md",
+    "03-travel-policy.md",
+    "09-benefits.md"
+   ],
+   "retrieval_hit_top3": true,
+   "checks": {
+    "facts_present": true,
+    "cited_right_doc": true,
+    "right_tool_called": true,
+    "tool_args_correct": true,
+    "pass": true
+   },
+   "latency_s": 8.38,
+   "llm_calls": 2,
+   "input_tokens": 2733,
+   "output_tokens": 102,
+   "confirmation_requested": false
+  },
+  {
+   "id": "q37",
+   "class": "oos",
+   "question": "What is the capital of France?",
+   "answer": "I can only answer questions about the Meridian Labs handbook and people-ops tools.",
+   "citations": [],
+   "tool_calls": [],
+   "retrieved_docs": [],
+   "retrieval_top3": [],
+   "retrieval_hit_top3": null,
+   "checks": {
+    "refused": true,
+    "no_tool_call": true,
+    "pass": true
+   },
+   "latency_s": 3.43,
+   "llm_calls": 1,
+   "input_tokens": 942,
+   "output_tokens": 16,
+   "confirmation_requested": false
+  },
+  {
+   "id": "q38",
+   "class": "oos",
+   "question": "Write me a Python function to reverse a string.",
+   "answer": "I can only answer questions about the Meridian Labs handbook and people-ops tools.",
+   "citations": [],
+   "tool_calls": [],
+   "retrieved_docs": [],
+   "retrieval_top3": [],
+   "retrieval_hit_top3": null,
+   "checks": {
+    "refused": true,
+    "no_tool_call": true,
+    "pass": true
+   },
+   "latency_s": 1.59,
+   "llm_calls": 1,
+   "input_tokens": 945,
+   "output_tokens": 16,
+   "confirmation_requested": false
+  },
+  {
+   "id": "q39",
+   "class": "oos",
+   "question": "What is the company's stock price today?",
+   "answer": "I can only answer questions about the Meridian Labs handbook and people-ops tools.",
+   "citations": [],
+   "tool_calls": [],
+   "retrieved_docs": [],
+   "retrieval_top3": [],
+   "retrieval_hit_top3": null,
+   "checks": {
+    "refused": true,
+    "no_tool_call": true,
+    "pass": true
+   },
+   "latency_s": 1.07,
+   "llm_calls": 1,
+   "input_tokens": 945,
+   "output_tokens": 16,
+   "confirmation_requested": false
+  },
+  {
+   "id": "q40",
+   "class": "oos",
+   "question": "What is the leave policy at Google?",
+   "answer": "I can only answer questions about the Meridian Labs handbook and people-ops tools.",
+   "citations": [],
+   "tool_calls": [],
+   "retrieved_docs": [],
+   "retrieval_top3": [],
+   "retrieval_hit_top3": null,
+   "checks": {
+    "refused": true,
+    "no_tool_call": true,
+    "pass": true
+   },
+   "latency_s": 4.47,
+   "llm_calls": 1,
+   "input_tokens": 943,
+   "output_tokens": 16,
+   "confirmation_requested": false
+  }
+ ],
+ "rescored_at": "2026-11-11T17:40:42+00:00"
+}
