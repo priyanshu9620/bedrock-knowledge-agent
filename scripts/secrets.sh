@@ -4,7 +4,7 @@
 #   SECRETS_PASSPHRASE=... scripts/secrets.sh pack     → secrets.tar.enc
 #   SECRETS_PASSPHRASE=... scripts/secrets.sh unpack   → restores the files below in place
 set -euo pipefail
-FILES=(.env infra/terraform.tfstate infra/terraform.tfstate.backup infra/.terraform.lock.hcl aws-credentials)
+FILES=(.env infra/terraform.tfvars infra/terraform.tfstate infra/terraform.tfstate.backup infra/.terraform.lock.hcl aws-credentials)
 cd "$(dirname "$0")/.."
 : "${SECRETS_PASSPHRASE:?set SECRETS_PASSPHRASE}"
 case "${1:-}" in
